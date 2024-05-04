@@ -1,13 +1,14 @@
 <script>
-	import { getContext } from "svelte";
-	import Demo from "$components/demo/Demo.svelte";
-	import WIP from "$components/helpers/WIP.svelte";
-	// import Footer from "$components/Footer.svelte";
-
-	// const copy = getContext("copy");
-	// const data = getContext("data");
+	import Card from "$components/Card.svelte";
 </script>
 
-<WIP />
-<Demo />
-<!-- <Footer /> -->
+<article>
+	<Card />
+</article>
+
+<style>
+	article {
+		max-width: 600px;
+		margin: auto;
+	}
+</style>

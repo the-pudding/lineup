@@ -1,33 +1,62 @@
 <script>
+	export let player;
+	export let type;
+	export let top;
+	export let left;
+	export let transform;
+	export let background;
+	export let zIndex;
+	export let order;
+
 	let side = "front";
 
-	const flip = () => {
-		side = side === "front" ? "back" : "front";
+	const onClick = () => {
+		if (order[0].id !== player.id) {
+			order = [player, ...order.filter((d) => d !== player)];
+		} else {
+			side = side === "front" ? "back" : "front";
+		}
 	};
 </script>
 
-<div class="card" class:flipped={side === "back"}>
+<div
+	class="card"
+	class:flipped={side === "back"}
+	class:ghost={type === "ghost"}
+	style:top
+	style:left
+	style:transform
+	style:background
+	style:z-index={zIndex}
+	on:click={onClick}
+>
 	<div class="inner">
 		<div class={side}>
-			{#if side === "front"}
+			{player?.name}
+			<!-- {#if side === "front"}
 				This is the <strong>front</strong> of the card.
 			{:else if side === "back"}
 				This is the <strong>back</strong> of the card.
-			{/if}
+			{/if} -->
 		</div>
 	</div>
 </div>
-<button on:click={flip}>flip</button>
 
 <style>
 	.card {
+		position: absolute;
 		width: 200px;
 		height: 300px;
 		border-radius: 5px;
 		perspective: 1000px;
+		/* background: var(--color-gray-100); */
 	}
 	.card:hover {
 		cursor: pointer;
+	}
+	.card.ghost {
+		position: static;
+		visibility: hidden;
 	}
 	.inner {
 		position: relative;
@@ -51,5 +80,6 @@
 	}
 	.back {
 		transform: rotateY(180deg);
+		background: lavender;
 	}
 </style>

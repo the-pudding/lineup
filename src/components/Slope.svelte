@@ -7,6 +7,7 @@
 	import _ from "lodash";
 
 	export let data;
+	export let title;
 
 	const xKey = "decade";
 	const attributes = ["speed", "average", "power", "walks"];
@@ -46,6 +47,7 @@
 </script>
 
 <div class="chart-container">
+	<div class="chart-title">{title}</div>
 	<LayerCake
 		x={xKey}
 		data={showInBetween ? dataCleaned : dataAveraged}
@@ -53,7 +55,7 @@
 		zScale={scaleOrdinal()}
 		zDomain={attributes}
 		zRange={colors}
-		padding={{ top: 0, right: 75, bottom: 0, left: 75 }}
+		padding={{ top: 25, right: 75, bottom: 0, left: 75 }}
 	>
 		<Svg>
 			<AxisX ticks={[1970, 2020]} />
@@ -67,7 +69,11 @@
 <style>
 	.chart-container {
 		width: 100%;
-		height: 200px;
+		max-width: 400px;
+		height: 300px;
 		margin: 2rem 0;
+	}
+	.chart-title {
+		font-weight: bold;
 	}
 </style>

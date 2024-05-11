@@ -6,13 +6,25 @@
 	import viewport from "$stores/viewport.js";
 	import _ from "lodash";
 
+	const activeSections = {
+		0: [0],
+		1: [1],
+		2: [2],
+		3: [3],
+		4: [4, 5, 6],
+		5: [7, 8]
+	};
 	let progressVisible = false;
 	let currentSection = 0;
 </script>
 
 <div class="progress" class:visible={progressVisible}>
 	{#each _.range(9) as i}
-		<div class="block" class:active={currentSection === i} />
+		{@const active =
+			currentSection !== undefined
+				? activeSections[currentSection].includes(i)
+				: false}
+		<div class="block" class:active />
 	{/each}
 </div>
 
@@ -48,6 +60,7 @@
 		height: 20px;
 		width: 50px;
 		margin: 2px 0;
+		transition: background-color calc(var(--1s) * 0.2);
 	}
 	.active {
 		background: green;

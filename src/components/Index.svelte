@@ -1,6 +1,6 @@
 <script>
 	import Intro from "$components/Intro.svelte";
-	import Section from "$components/Section.svelte";
+	import Sections from "$components/Sections.svelte";
 	import _ from "lodash";
 
 	import copy from "$data/copy.json";
@@ -14,9 +14,7 @@
 
 	<Intro />
 
-	{#each copy.sections as props}
-		<Section {...props} />
-	{/each}
+	<Sections />
 </article>
 
 <style>
@@ -37,5 +35,17 @@
 	}
 	.heading {
 		margin-bottom: 5rem;
+	}
+
+	.progress {
+		position: sticky;
+		top: 0;
+		left: 0;
+	}
+	.block {
+		background: var(--color-gray-100);
+		height: 20px;
+		width: 50px;
+		margin: 2px 0;
 	}
 </style>

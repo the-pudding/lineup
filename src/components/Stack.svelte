@@ -10,7 +10,11 @@
 	const angles = [-2, 4, -5];
 	const xs = [-2, 2, -5];
 	const ys = [-2, 2, -5];
-	const colors = ["#FFC857", "#E9724C", "#C5283D"];
+	const colors = [
+		"var(--color-gray-100)",
+		"var(--color-gray-300)",
+		"var(--color-gray-500)"
+	];
 </script>
 
 <div class="stack">

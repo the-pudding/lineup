@@ -1,5 +1,6 @@
 <script>
 	import { getContext } from "svelte";
+	import _ from "lodash";
 
 	const { data, xGet, yGet, yRange, xScale } = getContext("LayerCake");
 
@@ -13,6 +14,7 @@
 	};
 
 	export let fill = "#ccc";
+	export let fillHighlight;
 	export let stroke = "#000";
 	export let strokeWidth = 0;
 </script>
@@ -23,13 +25,16 @@
 		{@const y = $yGet(d)}
 		{@const width = $xScale.bandwidth ? $xScale.bandwidth() : columnWidth(d)}
 		{@const height = columnHeight(d)}
+		{@const max = _.maxBy($data, "value")}
+		{@const highlight =
+			fillHighlight && d.batting_position === max.batting_position}
 		<rect
 			data-id={i}
 			{x}
 			{y}
 			{width}
 			{height}
-			{fill}
+			fill={highlight ? fillHighlight : fill}
 			{stroke}
 			stroke-width={strokeWidth}
 		/>

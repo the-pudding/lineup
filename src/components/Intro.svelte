@@ -1,4 +1,5 @@
 <script>
+	import ChoosePlayer from "$components/ChoosePlayer.svelte";
 	import copy from "$data/copy.json";
 </script>
 
@@ -6,7 +7,9 @@
 	<p>{@html value}</p>
 {/each}
 
-<div class="viz">CHOOSE YOUR PLAYER</div>
+<div class="viz">
+	<ChoosePlayer />
+</div>
 
 {#each copy.intro2 as { value }}
 	<p>{@html value}</p>
@@ -20,9 +23,6 @@
 
 <style>
 	.viz {
-		background-color: var(--color-gray-100);
-		padding: 1rem;
-		margin: 2rem 0;
-		height: 200px;
+		margin: 3rem 0;
 	}
 </style>

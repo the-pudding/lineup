@@ -1,6 +1,6 @@
 <script>
 	import _ from "lodash";
-	import unweighted from "$data/unweighted.csv";
+	import slopeData from "$data/slope.csv";
 	import Slope from "$components/Slope.svelte";
 	import Stack from "$components/Stack.svelte";
 
@@ -11,7 +11,7 @@
 	export let description;
 	export let players;
 
-	const data = unweighted.filter((d) => d.lineup_slot === id);
+	const data = slopeData.filter((d) => d.slot === id);
 </script>
 
 <section id={_.kebabCase(title)}>

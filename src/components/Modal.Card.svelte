@@ -41,6 +41,15 @@
 							{/each}
 						</tr>
 					{/each}
+
+					<tr>
+						{#each columns as column, i}
+							{@const average =
+								seasons.reduce((acc, d) => acc + +d[column], 0) /
+								seasons.length}
+							<td class="average">{i === 0 ? "" : average.toFixed(1)}</td>
+						{/each}
+					</tr>
 				</table>
 				<div class="description">{info.name} was a great guy.</div>
 			</div>

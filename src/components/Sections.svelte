@@ -1,6 +1,6 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
-	import Section from "$components/Sections.Section.svelte";
+	import Section from "$components/Section.svelte";
 	import copy from "$data/copy.json";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";

@@ -1,27 +1,34 @@
 <script>
 	import Intro from "$components/Intro.svelte";
+	import Modal from "$components/Modal.svelte";
 	import Sections from "$components/Sections.svelte";
+	import { selectedCard } from "$stores/misc.js";
 	import _ from "lodash";
 
 	import copy from "$data/copy.json";
 </script>
 
-<article>
+<article class:disabled={$selectedCard}>
 	<div class="heading">
 		<h1>{copy.hed}</h1>
 		<div class="byline">{@html copy.byline}</div>
 	</div>
 
-	<Intro />
-
+	<!-- <Intro /> -->
 	<Sections />
 </article>
+
+<Modal />
 
 <style>
 	article {
 		max-width: 650px;
 		margin: auto;
 		font-family: var(--sans);
+	}
+	article.disabled {
+		opacity: 0.2;
+		pointer-events: none;
 	}
 	:global(.byline a) {
 		font-weight: bold;

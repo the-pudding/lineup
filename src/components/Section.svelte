@@ -1,23 +1,27 @@
 <script>
 	import _ from "lodash";
-	import slopeData from "$data/slope.csv";
+	import slope from "$data/slope.csv";
+	import cards from "$data/cards.csv";
 	import Slope from "$components/Slope.svelte";
-	import Stack from "$components/Stack.svelte";
+	import Cards from "$components/Cards.svelte";
 
 	export let i;
 	export let currentSection;
 	export let id;
 	export let title;
 	export let description;
-	export let players;
 
-	const data = slopeData.filter((d) => d.slot === id);
+	const slopeData = slope.filter((d) => d.slot === id);
+	const cardsData = cards.filter((d) => d.slot === id);
 </script>
 
 <section id={_.kebabCase(title)}>
 	<h2>{title}</h2>
 
-	<Slope {data} title={`Change in average attributes of batter #${id}`} />
+	<!-- <Slope
+		data={slopeData}
+		title={`Change in average attributes of batter #${id}`}
+	/> -->
 
 	{#if description}
 		<div class="description">
@@ -27,18 +31,7 @@
 		</div>
 	{/if}
 
-	{#if players}
-		<div class="cards">
-			<Stack
-				players={players.filter((d) => d.type === "old")}
-				label="pre-stats (70s/80s/90s)"
-			/>
-			<Stack
-				players={players.filter((d) => d.type === "new")}
-				label="post-stats (2020s)"
-			/>
-		</div>
-	{/if}
+	<Cards data={cardsData} />
 </section>
 
 <style>

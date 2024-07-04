@@ -56,7 +56,7 @@
 		opacity: 1;
 	}
 	.block {
-		background: var(--color-gray-100);
+		background: var(--color-gray-300);
 		height: 20px;
 		width: 50px;
 		margin: 2px 0;

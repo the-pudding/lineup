@@ -18,10 +18,10 @@
 <section id={_.kebabCase(title)}>
 	<h2>{title}</h2>
 
-	<!-- <Slope
+	<Slope
 		data={slopeData}
 		title={`Change in average attributes of batter #${id}`}
-	/> -->
+	/>
 
 	{#if description}
 		<div class="description">

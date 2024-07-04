@@ -1,19 +1,21 @@
 <script>
 	import { selectedCard } from "$stores/misc.js";
-	import cardData from "$data/cards.csv";
+	import playersData from "$data/players.csv";
+	import stats from "$data/stats.csv";
 
-	const columns = ["yr", "walks", "avg", "power", "speed"];
+	const columns = ["season", "walks", "average", "power", "speed"];
 
-	$: data = cardData.find((d) => d.id === $selectedCard);
+	$: info = playersData.find((d) => d.name === $selectedCard);
+	$: seasons = stats.filter((d) => d.name === $selectedCard);
 </script>
 
-{#if data}
+{#if info}
 	<div class="card">
 		<div class="top">
-			<div class="number">{data.number || "#40"}</div>
+			<div class="number">{info.number || "#40"}</div>
 			<div class="bg">
-				<div class="name">{data.name}</div>
-				<div class="position">{data.position || "SS"}</div>
+				<div class="name">{info.name}</div>
+				<div class="position">{info.position || "SS"}</div>
 			</div>
 		</div>
 
@@ -22,32 +24,25 @@
 				<table>
 					<tr>
 						{#each columns as column}
-							<th>{column}</th>
+							{@const label =
+								column === "season"
+									? "yr"
+									: column === "average"
+										? "avg"
+										: column}
+							<th>{label}</th>
 						{/each}
 					</tr>
-					<tr>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-					</tr>
-					<tr>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-						<td>100</td>
-					</tr>
+
+					{#each seasons as season}
+						<tr>
+							{#each columns as column}
+								<td>{season[column] || 0}</td>
+							{/each}
+						</tr>
+					{/each}
 				</table>
-				<div class="description">{data.name} was a great guy.</div>
+				<div class="description">{info.name} was a great guy.</div>
 			</div>
 		</div>
 	</div>
@@ -103,12 +98,15 @@
 		font-weight: bold;
 		text-transform: uppercase;
 	}
+	td {
+		padding: 0;
+	}
 	tr:first-of-type,
 	tr:nth-last-of-type(2) {
 		border-bottom: 3px solid black;
 	}
 	.description {
-		margin-top: 300px;
+		margin-top: 3rem;
 		text-align: center;
 	}
 </style>

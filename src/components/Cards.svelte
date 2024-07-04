@@ -5,7 +5,14 @@
 	export let data;
 
 	const stacks = ["1970-2009", "2010-present"];
-	const attributes = ["speed", "average", "power", "walks"];
+	const attributes = [
+		"win_shares",
+		"average",
+		"power",
+		"walks",
+		"speed",
+		"pct_at_slot"
+	];
 	const dataCleaned = _.groupBy(
 		data.map((d) => {
 			const obj = d;

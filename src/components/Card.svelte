@@ -1,7 +1,6 @@
 <script>
 	import { selectedCard } from "$stores/misc.js";
 
-	export let id;
 	export let name;
 	export let era;
 	export let rank;
@@ -12,7 +11,7 @@
 	const ys = [0, 0, -20];
 
 	const onClick = () => {
-		$selectedCard = id;
+		$selectedCard = name;
 	};
 </script>
 

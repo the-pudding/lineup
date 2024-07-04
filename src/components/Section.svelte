@@ -1,7 +1,7 @@
 <script>
 	import _ from "lodash";
 	import slope from "$data/slope.csv";
-	import cards from "$data/cards.csv";
+	import players from "$data/players.csv";
 	import Slope from "$components/Slope.svelte";
 	import Cards from "$components/Cards.svelte";
 
@@ -12,7 +12,7 @@
 	export let description;
 
 	const slopeData = slope.filter((d) => d.slot === id);
-	const cardsData = cards.filter((d) => d.slot === id);
+	const playersData = players.filter((d) => d.slot === id);
 </script>
 
 <section id={_.kebabCase(title)}>
@@ -31,7 +31,7 @@
 		</div>
 	{/if}
 
-	<Cards data={cardsData} />
+	<Cards data={playersData} />
 </section>
 
 <style>

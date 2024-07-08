@@ -11,7 +11,7 @@
 
 <style>
 	.modal {
-		background: black;
+		background: #222;
 		padding: 3rem;
 		position: fixed;
 		top: 50%;
@@ -30,5 +30,6 @@
 		color: white;
 		background: none;
 		padding: 10px 10px 0 0;
+		font-size: 1.5rem;
 	}
 </style>

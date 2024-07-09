@@ -28,7 +28,7 @@
 <div class="cards">
 	{#each stacks as stackId}
 		<div class="stack">
-			{#each dataCleaned[stackId] as card}
+			{#each dataCleaned[stackId].slice(0, 3) as card}
 				<Card {...card} />
 			{/each}
 			<div class="ghost" />
@@ -41,6 +41,7 @@
 	.cards {
 		display: flex;
 		width: 100%;
+		margin-top: 4rem;
 	}
 	.stack {
 		position: relative;

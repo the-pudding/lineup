@@ -9,26 +9,31 @@
 </script>
 
 <article class:disabled={$selectedCard}>
-	<div class="heading">
-		<h1>{copy.hed}</h1>
-		<div class="byline">{@html copy.byline}</div>
-	</div>
+	<Intro />
 
-	<!-- <Intro /> -->
-	<Sections />
+	<div class="main">
+		<div class="heading">
+			<h1>{copy.hed}</h1>
+			<div class="byline">{@html copy.byline}</div>
+		</div>
+
+		<Sections />
+	</div>
 </article>
 
 <Modal />
 
 <style>
 	article {
-		max-width: 650px;
-		margin: auto;
 		font-family: var(--sans);
 	}
 	article.disabled {
 		opacity: 0.2;
 		pointer-events: none;
+	}
+	.main {
+		max-width: 650px;
+		margin: auto;
 	}
 	:global(.byline a) {
 		font-weight: bold;

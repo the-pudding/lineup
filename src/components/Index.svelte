@@ -14,6 +14,7 @@
 	<div class="main">
 		<div class="heading">
 			<h1>{copy.hed}</h1>
+
 			<div class="byline">{@html copy.byline}</div>
 		</div>
 
@@ -40,6 +41,8 @@
 	}
 	h1 {
 		font-family: var(--serif);
+		font-size: 3.5rem;
+		margin-bottom: 2rem;
 	}
 	h1,
 	.byline {
@@ -48,7 +51,6 @@
 	.heading {
 		margin-bottom: 5rem;
 	}
-
 	.progress {
 		position: sticky;
 		top: 0;

@@ -63,6 +63,6 @@
 		transition: background-color calc(var(--1s) * 0.2);
 	}
 	.active {
-		background: var(--color-green);
+		background: var(--color-gray-800);
 	}
 </style>

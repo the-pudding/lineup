@@ -37,7 +37,7 @@
 		padding={{ top: 25, right: 75, bottom: 0, left: 75 }}
 	>
 		<Svg>
-			<AxisX />
+			<AxisX dy={20} />
 			<AxisY textAnchor={"end"} />
 			<AxisY gridlines={false} dxTick={"100%"} textAnchor={"start"} />
 			<Balls />
@@ -47,6 +47,7 @@
 
 <style>
 	.chart-container {
+		font-family: var(--mono);
 		width: 100%;
 		max-width: 400px;
 		height: 300px;

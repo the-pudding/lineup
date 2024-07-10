@@ -42,6 +42,7 @@
 		align-items: center;
 	}
 	h2 {
+		font-size: 3rem;
 		font-family: var(--serif);
 		align-self: start;
 	}

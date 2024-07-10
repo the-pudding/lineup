@@ -1,30 +1,8 @@
 <script>
+	import cleveland from "$data/cleveland.csv";
 	import _ from "lodash";
 
 	export let step;
-
-	const old = [
-		"Kenny Lofton",
-		"Omar Vizquel",
-		"Roberto Alomar",
-		"Manny Ramirez",
-		"Jim Thome",
-		"Richie Sexson",
-		"Travis Fryman",
-		"Wil Cordero",
-		"Ricky Ledee"
-	];
-	const modern = [
-		"Omar Vizquel",
-		"Roberto Alomar",
-		"Travis Fryman",
-		"Jim Thome",
-		"Kenny Lofton",
-		"Manny Ramirez",
-		"Richie Sexson",
-		"Wil Cordero",
-		"Ricky Ledee"
-	];
 
 	const colors = [
 		"#f7d7c4",
@@ -37,53 +15,61 @@
 		"#c4f7d7",
 		"#c4f7e2"
 	];
+
+	cleveland.forEach((d) => {
+		d.oldSlot = +d.oldSlot;
+		d.newSlot = +d.newSlot;
+		d.average = +d.average;
+		d.power = +d.power;
+		d.walks = +d.walks;
+		d.speed = +d.speed;
+	});
 </script>
 
 <div class="lineups">
-	<div class="old" class:visible={true}>
-		<table>
-			<tr>
-				<th colspan="3">2000 Cleveland Indians</th>
-			</tr>
-			{#each old as name, i}
-				<tr class:faded={step === 1 && i !== 1}>
-					<td>{i + 1}</td>
-					<td style:background={colors[i]}>{name}</td>
-					<table class="small">
-						{#each [1, 2, 3, 4] as d}
-							<tr>
-								<td>Stat</td>
-								<td>Stat</td>
-							</tr>
-						{/each}
-					</table>
-				</tr>
-			{/each}
-		</table>
-	</div>
-	<div class="new" class:visible={step >= 4}>
-		<table>
-			<tr>
-				<th colspan="3">"2024" Cleveland Indians</th>
-			</tr>
-			{#each modern as name, i}
+	{#each ["old", "new"] as lineup}
+		{@const data = _.orderBy(
+			cleveland,
+			lineup === "old" ? "oldSlot" : "newSlot"
+		)}
+		<div class={lineup} class:visible={lineup === "old" || step >= 4}>
+			<table>
 				<tr>
-					<td>{i + 1}</td>
-					<td style:background={colors[old.findIndex((d) => d === name)]}
-						>{name}</td
+					<th colspan="3"
+						>{lineup === "old" ? 2000 : `"2024"`} Cleveland Indians</th
 					>
-					<table class="small">
-						{#each [1, 2, 3, 4] as d}
-							<tr>
-								<td>Stat</td>
-								<td>Stat</td>
-							</tr>
-						{/each}
-					</table>
 				</tr>
-			{/each}
-		</table>
-	</div>
+				{#each data as { name, average, power, walks, speed, oldSlot, newSlot }, i}
+					{@const background =
+						colors[
+							_.orderBy(cleveland, "oldSlot").findIndex((d) => d.name === name)
+						]}
+					<tr class:faded={step === 1 && i !== 1}>
+						<td>{i + 1}</td>
+						<td style:background>
+							{name}
+						</td>
+						<td>
+							<table class="small">
+								<tr>
+									<td>Average</td>
+									<td>Power</td>
+									<td>Walks</td>
+									<td>Speed</td>
+								</tr>
+								<tr>
+									<td>{average}</td>
+									<td>{power}</td>
+									<td>{walks}</td>
+									<td>{speed}</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				{/each}
+			</table>
+		</div>
+	{/each}
 </div>
 
 <style>
@@ -110,9 +96,15 @@
 	h3 {
 		text-align: center;
 	}
+	table {
+		width: 100%;
+		table-layout: auto;
+	}
 	td {
-		padding: 0;
+		padding: 0 4px;
 		border: 1px solid black;
+		white-space: nowrap;
+		vertical-align: middle;
 	}
 	tr {
 		border: 1px solid black;

@@ -10,7 +10,7 @@
 
 <!-- <article class:disabled={$selectedCard}> -->
 <article>
-	<!-- <Intro /> -->
+	<Intro />
 
 	<div class="main">
 		<div class="heading">

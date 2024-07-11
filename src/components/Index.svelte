@@ -8,8 +8,9 @@
 	import copy from "$data/copy.json";
 </script>
 
-<article class:disabled={$selectedCard}>
-	<Intro />
+<!-- <article class:disabled={$selectedCard}> -->
+<article>
+	<!-- <Intro /> -->
 
 	<div class="main">
 		<div class="heading">
@@ -22,7 +23,7 @@
 	</div>
 </article>
 
-<Modal />
+<!-- <Modal /> -->
 
 <style>
 	article {

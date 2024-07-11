@@ -4,7 +4,10 @@
 
 	export let data;
 
-	const stacks = ["1970-2009", "2010-present"];
+	const eras = [
+		{ id: "1970-2009", name: "Pre-Stats" },
+		{ id: "2010-present", name: "Post-Stats" }
+	];
 	const attributes = [
 		"win_shares",
 		"average",
@@ -26,13 +29,15 @@
 </script>
 
 <div class="cards">
-	{#each stacks as stackId}
-		<div class="stack">
-			{#each dataCleaned[stackId].slice(0, 3) as card}
-				<Card {...card} />
-			{/each}
-			<div class="ghost" />
-			<div class="label">{stackId}</div>
+	{#each eras as era, i}
+		<div class="era">
+			<div class="stack">
+				{#each dataCleaned[era.id].slice(0, 1) as card}
+					<Card {...card} />
+				{/each}
+			</div>
+			<div class="label">{era.name}</div>
+			<div class="sublabel">({era.id})</div>
 		</div>
 	{/each}
 </div>
@@ -41,18 +46,25 @@
 	.cards {
 		display: flex;
 		width: 100%;
-		margin-top: 4rem;
 	}
-	.stack {
+	.era {
 		position: relative;
 		width: 50%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
-	.ghost {
-		height: 250px;
+	.stack {
+		margin-bottom: 1rem;
 	}
-	.label {
+	.label,
+	.sublabel {
 		font-weight: bold;
 		text-align: center;
-		margin-top: 2rem;
+	}
+	.sublabel {
+		font-size: 0.9rem;
+		color: var(--color-gray-700);
+		font-family: var(--mono);
 	}
 </style>

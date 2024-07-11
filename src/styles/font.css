@@ -93,7 +93,7 @@
 
 @font-face {
 	font-family: "NKOTB Fever";
-	src: url("assets/font/NkotbFever-rW18.ttf") format("truetype");
+	src: url("/assets/font/NkotbFever-rW18.ttf") format("truetype");
 	font-weight: 400;
 	font-style: normal;
 	font-stretch: normal;

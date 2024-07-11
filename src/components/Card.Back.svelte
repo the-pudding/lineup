@@ -21,8 +21,7 @@
 	class="back"
 	style={`--card-bg: ${style.bg}; --card-fg: ${style.fg}; --card-main: ${style.main}`}
 >
-	back
-	<!-- <div class="top">
+	<div class="top">
 		<div class="number">{info.number || "#40"}</div>
 		<div class="bg">
 			<div class="name">{info.name}</div>
@@ -56,8 +55,8 @@
 				{/each}
 			</tr>
 		</table>
-		<div class="description">{info.name} was a great guy.</div>
-	</div> -->
+	</div>
+	<div class="description">{info.name} was a great guy.</div>
 </div>
 
 <style>
@@ -77,12 +76,15 @@
 		align-items: center;
 		color: var(--card-fg);
 	}
+	.top,
+	.description {
+		flex-shrink: 0;
+	}
 	.number {
-		font-size: 0.5rem;
 		font-weight: bold;
+		margin-right: 0.5rem;
 	}
 	.position {
-		font-size: 0.5rem;
 		margin-left: 1rem;
 	}
 	.bg {
@@ -96,8 +98,8 @@
 		margin-bottom: 2px;
 	}
 	.name {
+		font-size: 1.8rem;
 		font-weight: bold;
-		font-size: 0.8rem;
 		text-transform: uppercase;
 		font-style: italic;
 	}
@@ -114,6 +116,7 @@
 	}
 	table {
 		font-family: var(--mono);
+		overflow: scroll;
 	}
 	th {
 		font-weight: bold;
@@ -128,7 +131,7 @@
 		border-bottom: 1px solid var(--card-fg);
 	}
 	.description {
-		margin-top: 1rem;
+		margin: 1rem 0;
 		text-align: center;
 	}
 </style>

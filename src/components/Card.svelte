@@ -41,7 +41,7 @@
 <div
 	class="card"
 	class:flipped
-	style="--card-height: {cardHeight}px; --double: {cardHeight *
+	style="--card-height: {cardHeight}px; --card-height-enlarged: {cardHeight *
 		2}px; --dx: {dx}px; --dy: {dy}px; --fast-flip: 0.5s; --slow-flip: 1.5s"
 	on:click={onClick}
 	on:keydown={onKeyDown}
@@ -82,7 +82,7 @@
 		transform-origin: center center;
 	}
 	img.flipped {
-		height: var(--double);
+		height: var(--card-height-enlarged);
 		transition: height var(--slow-flip);
 	}
 	.card {

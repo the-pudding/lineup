@@ -56,6 +56,7 @@
 	}
 	.stack {
 		margin-bottom: 1rem;
+		position: relative;
 	}
 	.label,
 	.sublabel {

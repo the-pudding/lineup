@@ -17,63 +17,59 @@
 	const style = styles[0];
 </script>
 
-{#if info}
-	<div
-		class="card"
-		style={`--card-bg: ${style.bg}; --card-fg: ${style.fg}; --card-main: ${style.main}`}
-	>
-		<div class="top">
-			<div class="number">{info.number || "#40"}</div>
-			<div class="bg">
-				<div class="name">{info.name}</div>
-				<div class="position">{info.position || "SS"}</div>
-			</div>
-		</div>
-
-		<div class="main">
-			<table>
-				<tr>
-					{#each columns as column}
-						{@const label =
-							column === "season"
-								? "yr"
-								: column === "average"
-									? "avg"
-									: column}
-						<th>{label}</th>
-					{/each}
-				</tr>
-
-				{#each seasons as season}
-					<tr>
-						{#each columns as column}
-							<td>{season[column]}</td>
-						{/each}
-					</tr>
-				{/each}
-
-				<tr>
-					{#each columns as column, i}
-						{@const average =
-							seasons.reduce((acc, d) => acc + +d[column], 0) / seasons.length}
-						<td class="average">{i === 0 ? "" : average.toFixed(1)}</td>
-					{/each}
-				</tr>
-			</table>
-			<div class="description">{info.name} was a great guy.</div>
+<div
+	class="back"
+	style={`--card-bg: ${style.bg}; --card-fg: ${style.fg}; --card-main: ${style.main}`}
+>
+	back
+	<!-- <div class="top">
+		<div class="number">{info.number || "#40"}</div>
+		<div class="bg">
+			<div class="name">{info.name}</div>
+			<div class="position">{info.position || "SS"}</div>
 		</div>
 	</div>
-{/if}
+
+	<div class="main">
+		<table>
+			<tr>
+				{#each columns as column}
+					{@const label =
+						column === "season" ? "yr" : column === "average" ? "avg" : column}
+					<th>{label}</th>
+				{/each}
+			</tr>
+
+			{#each seasons as season}
+				<tr>
+					{#each columns as column}
+						<td>{season[column]}</td>
+					{/each}
+				</tr>
+			{/each}
+
+			<tr>
+				{#each columns as column, i}
+					{@const average =
+						seasons.reduce((acc, d) => acc + +d[column], 0) / seasons.length}
+					<td class="average">{i === 0 ? "" : average.toFixed(1)}</td>
+				{/each}
+			</tr>
+		</table>
+		<div class="description">{info.name} was a great guy.</div>
+	</div> -->
+</div>
 
 <style>
-	.card {
+	.back {
+		border-radius: 0.25rem;
 		background: var(--card-bg);
-		padding: 1rem;
+		padding: 0.5rem;
 		font-family: var(--sans);
 		display: flex;
 		flex-direction: column;
 		aspect-ratio: 10 / 14;
-		max-height: 665px;
+		height: 100%;
 	}
 	.top {
 		display: flex;
@@ -82,11 +78,11 @@
 		color: var(--card-fg);
 	}
 	.number {
-		font-size: 1.5rem;
+		font-size: 0.5rem;
 		font-weight: bold;
 	}
 	.position {
-		font-size: 1.5rem;
+		font-size: 0.5rem;
 		margin-left: 1rem;
 	}
 	.bg {
@@ -101,7 +97,7 @@
 	}
 	.name {
 		font-weight: bold;
-		font-size: 2rem;
+		font-size: 0.8rem;
 		text-transform: uppercase;
 		font-style: italic;
 	}
@@ -109,7 +105,7 @@
 		flex: 1;
 		background: var(--card-main);
 		color: var(--card-fg);
-		border: 6px solid var(--card-fg);
+		border: 2px solid var(--card-fg);
 		padding: 10px;
 		height: 100%;
 		display: flex;
@@ -122,13 +118,14 @@
 	th {
 		font-weight: bold;
 		text-transform: uppercase;
+		padding: 0;
 	}
 	td {
 		padding: 0;
 	}
 	tr:first-of-type,
 	tr:nth-last-of-type(2) {
-		border-bottom: 3px solid var(--card-fg);
+		border-bottom: 1px solid var(--card-fg);
 	}
 	.description {
 		margin-top: 1rem;

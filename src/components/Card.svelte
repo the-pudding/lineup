@@ -1,14 +1,14 @@
 <script>
 	import Back from "$components/Card.Back.svelte";
 	import viewport from "$stores/viewport.js";
-	import { onMount } from "svelte";
+	import { selectedCard } from "$stores/misc.js";
 
+	export let i;
 	export let name;
 	export let era;
 	export let rank;
 
 	let zIndex = 3 - rank;
-	let flipped = false;
 	let cardEl;
 	let cardWidth;
 	let dx;
@@ -16,12 +16,14 @@
 
 	const cardHeight = 250;
 	const angles = [-2, 5, -10];
-	const ys = [0, 0, -20];
+	const ys = [0, 0, 0];
 
 	const onClick = () => {
-		flipped = !flipped;
 		dx = $viewport.width / 2 - cardEl.getBoundingClientRect().left - cardWidth;
 		dy = $viewport.height / 2 - cardEl.getBoundingClientRect().top - cardHeight;
+
+		if (!$selectedCard) $selectedCard = name;
+		else $selectedCard = undefined;
 	};
 	const onKeyDown = (event) => {
 		if (event.key === "Enter" || event.key === " ") {
@@ -29,20 +31,24 @@
 			onClick();
 		}
 	};
+
+	$: flipped = $selectedCard === name;
+	$: disabled = $selectedCard && $selectedCard !== name;
 </script>
 
-<img
-	class="ghost"
-	style="--card-height: {cardHeight}px"
-	src={`assets/cards/${era === "1970-2009" ? "old" : "new"}-${rank}.png`}
-	alt={`Baseball card of ${name}`}
-/>
+{#if i === 0}
+	<div class="placeholder" style:height={`${cardHeight}px`} />
+{/if}
 
 <div
 	class="card"
 	class:flipped
-	style="--card-height: {cardHeight}px; --card-height-enlarged: {cardHeight *
-		2}px; --dx: {dx}px; --dy: {dy}px; --fast-flip: 0.5s; --slow-flip: 1.5s"
+	class:disabled
+	style:z-index={flipped ? 1000 : zIndex}
+	style="--y-offset: {ys[i]}px; --angle: {angles[
+		i
+	]}deg; --card-height: {cardHeight}px; --card-height-enlarged: {cardHeight *
+		2}px; --dx: {dx}px; --dy: {dy}px; --flip-speed: 0.5s"
 	on:click={onClick}
 	on:keydown={onKeyDown}
 	role="button"
@@ -50,86 +56,90 @@
 	bind:this={cardEl}
 	bind:clientWidth={cardWidth}
 >
-	<img
-		class="ghost"
-		class:flipped
-		src={`assets/cards/${era === "1970-2009" ? "old" : "new"}-${rank}.png`}
-		alt={`Baseball card of ${name}`}
-	/>
-	<div class="back" class:flipped>
-		<Back {name} />
+	<div class="placeholder" />
+	<div class="back">
+		<Back {name} {flipped} />
 	</div>
-	<div class="front" class:flipped>
+	<div class="front">
 		<img
 			src={`assets/cards/${era === "1970-2009" ? "old" : "new"}-${rank}.png`}
 			alt={`Baseball card of ${name}`}
-			class:flipped
 		/>
 	</div>
 </div>
 
 <style>
-	img {
-		width: auto;
-		border-radius: 0.25rem;
-	}
-	.ghost {
-		visibility: hidden;
-	}
-	img {
-		height: var(--card-height);
-		transition: height var(--fast-flip);
-		transform-origin: center center;
-	}
-	img.flipped {
-		height: var(--card-height-enlarged);
-		transition: height var(--slow-flip);
-	}
 	.card {
 		position: absolute;
 		top: 0;
 		border-radius: 0.25rem;
 		transform-origin: center center;
-		transition:
-			transform var(--fast-flip),
-			height var(--fast-flip);
+		transform: translateY(var(--y-offset)) rotate(var(--angle));
+		transition: transform var(--flip-speed);
 	}
 	.card.flipped {
 		transform: translate(var(--dx), var(--dy));
-		transition:
-			transform var(--slow-flip),
-			height var(--slow-flip);
-		z-index: 1000;
+		transition: transform var(--flip-speed);
+	}
+	.card.disabled {
+		pointer-events: none;
 	}
 	.card:hover {
 		cursor: pointer;
 	}
+	.card:not(.flipped):hover {
+		transform: translateY(-10px) rotate(var(--angle));
+		transition: transform 0.2s;
+	}
+
 	.front,
 	.back {
 		position: absolute;
 		top: 0;
 		box-sizing: border-box;
 		border-radius: 0.25rem;
+		aspect-ratio: 10 / 14;
 		width: 100%;
 		height: 100%;
 		box-shadow:
 			0 4px 6px -1px #0000001a,
 			0 2px 4px -1px rgba(0, 0, 0, 0.06);
-		transition: transform var(--fast-flip) ease;
+		transition: transform var(--flip-speed) ease;
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
-		background-color: #ebf4ff;
+		background-color: #a6a78b;
 	}
 	.front {
 		transform: perspective(1000px) rotateY(0deg);
 	}
-	.front.flipped {
+	.flipped .front {
 		transform: perspective(1000px) rotateY(-180deg);
 	}
 	.back {
 		transform: perspective(1000px) rotateY(180deg);
 	}
-	.back.flipped {
+	.flipped .back {
 		transform: perspective(1000px) rotateY(0deg);
+	}
+
+	img {
+		height: var(--card-height);
+		width: auto;
+		border-radius: 0.25rem;
+	}
+	.placeholder {
+		height: var(--card-height);
+		width: auto;
+		aspect-ratio: 10 / 14;
+		visibility: hidden;
+	}
+	img,
+	.placeholder {
+		transition: height var(--flip-speed);
+		transform-origin: center center;
+	}
+	.flipped img,
+	.flipped .placeholder {
+		height: var(--card-height-enlarged);
 	}
 </style>

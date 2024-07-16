@@ -14,7 +14,8 @@
 		"power",
 		"walks",
 		"speed",
-		"pct_at_slot"
+		"pct_at_slot",
+		"rank"
 	];
 	const dataCleaned = _.groupBy(
 		data.map((d) => {
@@ -29,11 +30,11 @@
 </script>
 
 <div class="cards">
-	{#each eras as era, i}
+	{#each eras as era}
 		<div class="era">
 			<div class="stack">
-				{#each dataCleaned[era.id].slice(0, 1) as card}
-					<Card {...card} />
+				{#each dataCleaned[era.id].slice(0, 3) as card, i}
+					<Card {...card} {i} />
 				{/each}
 			</div>
 			<div class="label">{era.name}</div>
@@ -46,6 +47,7 @@
 	.cards {
 		display: flex;
 		width: 100%;
+		margin: 2.5rem 0;
 	}
 	.era {
 		position: relative;

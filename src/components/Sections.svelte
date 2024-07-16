@@ -4,6 +4,7 @@
 	import copy from "$data/copy.json";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";
+	import { selectedCard } from "$stores/misc.js";
 	import _ from "lodash";
 
 	const activeSections = {
@@ -16,6 +17,12 @@
 	};
 	let progressVisible = false;
 	let currentSection = 0;
+
+	const resetCard = () => {
+		$selectedCard = undefined;
+	};
+
+	$: currentSection, resetCard();
 </script>
 
 <div class="progress" class:visible={progressVisible}>

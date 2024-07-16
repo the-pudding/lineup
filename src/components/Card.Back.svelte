@@ -4,6 +4,7 @@
 	import _ from "lodash";
 
 	export let name;
+	export let flipped;
 
 	const columns = ["season", "walks", "average", "power", "speed"];
 
@@ -19,6 +20,7 @@
 
 <div
 	class="back"
+	class:visible={flipped}
 	style={`--card-bg: ${style.bg}; --card-fg: ${style.fg}; --card-main: ${style.main}`}
 >
 	<div class="top">
@@ -69,6 +71,12 @@
 		flex-direction: column;
 		aspect-ratio: 10 / 14;
 		height: 100%;
+		transition: opacity 0.2s;
+		opacity: 0;
+	}
+	.back.visible {
+		transition: opacity 0.2s 0.5s;
+		opacity: 1;
 	}
 	.top {
 		display: flex;
@@ -113,10 +121,10 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		overflow: scroll;
 	}
 	table {
 		font-family: var(--mono);
-		overflow: scroll;
 	}
 	th {
 		font-weight: bold;

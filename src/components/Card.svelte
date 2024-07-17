@@ -7,6 +7,7 @@
 	export let name;
 	export let era;
 	export let rank;
+	export let blurb;
 
 	let zIndex = 3 - rank;
 	let cardEl;
@@ -58,7 +59,7 @@
 >
 	<div class="placeholder" />
 	<div class="back">
-		<Back {name} {flipped} />
+		<Back {name} {blurb} {flipped} />
 	</div>
 	<div class="front">
 		<img

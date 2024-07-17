@@ -4,6 +4,7 @@
 	import _ from "lodash";
 
 	export let name;
+	export let blurb;
 	export let flipped;
 
 	const columns = ["season", "walks", "average", "power", "speed"];
@@ -58,7 +59,7 @@
 			</tr>
 		</table>
 	</div>
-	<div class="description">{info.name} was a great guy.</div>
+	<div class="description">{blurb || `${info.name} was a great guy.`}</div>
 </div>
 
 <style>

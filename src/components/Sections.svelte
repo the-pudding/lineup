@@ -1,11 +1,12 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 	import Section from "$components/Section.svelte";
-	import copy from "$data/copy.json";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";
 	import { selectedCard } from "$stores/misc.js";
 	import _ from "lodash";
+
+	export let sections;
 
 	const activeSections = {
 		0: [0],
@@ -42,8 +43,8 @@
 	on:exit={() => (progressVisible = false)}
 >
 	<Scrolly bind:value={currentSection}>
-		{#each copy.sections as props, i}
-			<Section {...props} {i} bind:currentSection />
+		{#each sections as props}
+			<Section {...props} />
 		{/each}
 	</Scrolly>
 </div>
@@ -51,6 +52,8 @@
 <style>
 	.sections {
 		position: relative;
+		max-width: 630px;
+		margin: 0 auto;
 	}
 	.progress {
 		position: fixed;
@@ -59,7 +62,7 @@
 		opacity: 0;
 		transition: opacity calc(var(--1s) * 0.5);
 	}
-	.visible {
+	.progress.visible {
 		opacity: 1;
 	}
 	.block {

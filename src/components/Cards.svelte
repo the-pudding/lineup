@@ -33,7 +33,7 @@
 	{#each eras as era}
 		<div class="era">
 			<div class="stack">
-				{#each dataCleaned[era.id].slice(0, 3) as card, i}
+				{#each dataCleaned[era.id] as card, i}
 					<Card {...card} {i} />
 				{/each}
 			</div>

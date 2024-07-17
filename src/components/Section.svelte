@@ -5,14 +5,18 @@
 	import Slope from "$components/Slope.svelte";
 	import Cards from "$components/Cards.svelte";
 
-	export let i;
-	export let currentSection;
 	export let id;
 	export let title;
-	export let description;
+	export let text;
+	export let cards;
 
 	const slopeData = slope.filter((d) => d.slot === id);
-	const playersData = players.filter((d) => d.slot === id);
+	const playersData = players
+		.filter((d) => d.slot === id && d.rank <= 3)
+		.map((d) => ({
+			...d,
+			blurb: cards.find((c) => c.name === d.name)?.blurb
+		}));
 </script>
 
 <section id={_.kebabCase(title)}>
@@ -23,10 +27,10 @@
 		title={`Change in average attributes of batter #${id}`}
 	/>
 
-	{#if description}
-		<div class="description">
-			{#each description as { text }}
-				<p>{@html text}</p>
+	{#if text}
+		<div class="text">
+			{#each text as { value }}
+				<p>{@html value}</p>
 			{/each}
 		</div>
 	{/if}
@@ -46,7 +50,7 @@
 		font-family: var(--serif);
 		align-self: start;
 	}
-	.description {
+	.text {
 		margin: 3rem 0;
 	}
 	.cards {

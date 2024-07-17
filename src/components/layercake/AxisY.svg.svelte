@@ -42,6 +42,22 @@
 			>
 		</g>
 	{/each}
+
+	{#if gridlines}
+		<line
+			class="average"
+			x1="0"
+			x2={"100%"}
+			y1={$yScale(2.5)}
+			y2={$yScale(2.5)}
+		/>
+		<text
+			class="average"
+			style="text-anchor:{textAnchor};"
+			x={-10}
+			y={$yScale(2.5)}>2.5 = average player</text
+		>
+	{/if}
 </g>
 
 <style>
@@ -55,6 +71,16 @@
 	}
 	.tick .gridline {
 		stroke-dasharray: 4px 4px;
+	}
+
+	line.average {
+		stroke: var(--color-gray-400);
+		stroke-dasharray: 4px 4px;
+	}
+	text.average {
+		fill: var(--color-gray-900);
+		font-size: 1rem;
+		alignment-baseline: middle;
 	}
 
 	.tick text {

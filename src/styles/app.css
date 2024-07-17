@@ -19,7 +19,7 @@
 
 	/* presets (used in reset.css) */
 	--border-radius: 2px;
-	--font-body: var(--serif);
+	--font-body: var(--sans);
 	--font-form: var(--sans);
 	--color-bg: #f6f1e8;
 	--color-fg: var(--color-black);
@@ -91,4 +91,8 @@ h5 {
 
 h6 {
 	font-size: var(--20px, 20px);
+}
+
+a {
+	font-weight: bold;
 }

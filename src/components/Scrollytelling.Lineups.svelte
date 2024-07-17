@@ -1,9 +1,22 @@
 <script>
-	import cleveland from "$data/cleveland.csv";
+	import toronto from "$data/toronto.csv";
 	import _ from "lodash";
 
 	export let step;
 
+	const stepShowModern = 4;
+	const highlights = [
+		{
+			step: 1,
+			era: "old",
+			name: "Joe Carter"
+		},
+		{
+			step: 6,
+			era: "new",
+			name: "Joe Carter"
+		}
+	];
 	const colors = [
 		"#f7d7c4",
 		"#f7e2c4",
@@ -15,36 +28,37 @@
 		"#c4f7d7",
 		"#c4f7e2"
 	];
+	const attr = ["oldSlot", "newSlot", "average", "power", "walks", "speed"];
 
-	cleveland.forEach((d) => {
-		d.oldSlot = +d.oldSlot;
-		d.newSlot = +d.newSlot;
-		d.average = +d.average;
-		d.power = +d.power;
-		d.walks = +d.walks;
-		d.speed = +d.speed;
+	toronto.forEach((d) => {
+		attr.forEach((attr) => {
+			d[attr] = +d[attr];
+		});
 	});
 </script>
 
 <div class="lineups">
 	{#each ["old", "new"] as lineup}
-		{@const data = _.orderBy(
-			cleveland,
-			lineup === "old" ? "oldSlot" : "newSlot"
-		)}
-		<div class={lineup} class:visible={lineup === "old" || step >= 4}>
+		{@const data = _.orderBy(toronto, lineup === "old" ? "oldSlot" : "newSlot")}
+		<div
+			class={lineup}
+			class:visible={lineup === "old" || step >= stepShowModern}
+		>
 			<table>
 				<tr>
 					<th colspan="3"
-						>{lineup === "old" ? 2000 : `"2024"`} Cleveland Indians</th
+						>{lineup === "old" ? 1993 : `"2024"`} Toronto Blue Jays</th
 					>
 				</tr>
-				{#each data as { name, average, power, walks, speed, oldSlot, newSlot }, i}
+				{#each data as { name, average, power, walks, speed }, i}
+					{@const faded = highlights.find(
+						(d) => d.step === step && d.era === lineup && d.name !== name
+					)}
 					{@const background =
 						colors[
-							_.orderBy(cleveland, "oldSlot").findIndex((d) => d.name === name)
+							_.orderBy(toronto, "oldSlot").findIndex((d) => d.name === name)
 						]}
-					<tr class:faded={step === 1 && i !== 1}>
+					<tr class:faded>
 						<td>{i + 1}</td>
 						<td style:background>
 							{name}

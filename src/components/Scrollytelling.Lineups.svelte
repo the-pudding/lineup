@@ -6,31 +6,15 @@
 
 	export let step;
 
+	const attr = ["average", "power", "walks", "speed"];
 	const stepShowModern = 4;
 	const highlights = [
 		{
 			step: 1,
 			era: "old",
 			name: "Joe Carter"
-		},
-		{
-			step: 6,
-			era: "new",
-			name: "Joe Carter"
 		}
 	];
-	const colors = [
-		"#f7d7c4",
-		"#f7e2c4",
-		"#f7ecc4",
-		"#f7f7c4",
-		"#e2f7c4",
-		"#d7f7c4",
-		"#c4f7c4",
-		"#c4f7d7",
-		"#c4f7e2"
-	];
-	const attr = ["oldSlot", "newSlot", "average", "power", "walks", "speed"];
 
 	const startColor = "indianred";
 	const endColor = "lightgreen";
@@ -40,8 +24,8 @@
 		.range([startColor, endColor]);
 
 	toronto.forEach((d) => {
-		attr.forEach((attr) => {
-			d[attr] = +d[attr];
+		[...attr, "oldSlot", "newSlot"].forEach((a) => {
+			d[a] = +d[a];
 		});
 	});
 </script>
@@ -60,13 +44,10 @@
 					>
 				</tr>
 				{#each data as { name, average, power, walks, speed }, i}
+					{@const stats = { average, power, walks, speed }}
 					{@const faded = highlights.find(
 						(d) => d.step === step && d.era === lineup && d.name !== name
 					)}
-					{@const background =
-						colors[
-							_.orderBy(toronto, "oldSlot").findIndex((d) => d.name === name)
-						]}
 					<tr class:faded>
 						<td>{i + 1}</td>
 						<td class="name">
@@ -75,16 +56,14 @@
 						<td class="contains-table">
 							<table class="inner">
 								<tr class="top">
-									<td>Average</td>
-									<td>Power</td>
-									<td>Walks</td>
-									<td>Speed</td>
+									{#each attr as a}
+										<td>{_.startCase(a)}</td>
+									{/each}
 								</tr>
 								<tr class="bottom">
-									<td style:background={colorScale(average)}>{average}</td>
-									<td style:background={colorScale(power)}>{power}</td>
-									<td style:background={colorScale(walks)}>{walks}</td>
-									<td style:background={colorScale(speed)}>{speed}</td>
+									{#each attr as a}
+										<td style:background={colorScale(stats[a])}>{stats[a]}</td>
+									{/each}
 								</tr>
 							</table>
 						</td>

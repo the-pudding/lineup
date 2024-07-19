@@ -38,8 +38,21 @@
 		max-width: 630px;
 		text-align: center;
 		z-index: 1000;
+		line-height: 1.7;
 	}
 	.step p {
 		padding: 1rem;
+	}
+
+	:global(span.player) {
+		background: var(--color-gray-100);
+		border: 2px solid var(--color-gray-400);
+		border-radius: 4px;
+		padding: 0px 4px;
+		white-space: nowrap;
+	}
+	:global(span.player):hover {
+		cursor: pointer;
+		background: var(--color-gray-200);
 	}
 </style>

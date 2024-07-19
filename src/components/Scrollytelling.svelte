@@ -33,7 +33,7 @@
 	}
 	.step {
 		margin: 80vh auto;
-		border: 2px solid black;
+		border: 3px solid black;
 		background: var(--color-bg);
 		max-width: 630px;
 		text-align: center;

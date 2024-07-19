@@ -34,7 +34,7 @@
 
 <style>
 	h1 {
-		font-family: var(--serif);
+		font-family: var(--handwriting);
 		font-size: 3.5rem;
 		max-width: 1000px;
 		margin: 0 auto;

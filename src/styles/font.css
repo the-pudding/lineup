@@ -99,3 +99,12 @@
 	font-stretch: normal;
 	font-display: swap;
 }
+
+@font-face {
+	font-family: "Caveat";
+	src: url("/assets/font/Caveat-VariableFont_wght.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}

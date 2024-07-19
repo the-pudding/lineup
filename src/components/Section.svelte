@@ -47,7 +47,7 @@
 	}
 	h2 {
 		font-size: 3rem;
-		font-family: var(--serif);
+		font-family: var(--handwriting);
 		align-self: start;
 	}
 	.text {

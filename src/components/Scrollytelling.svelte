@@ -46,7 +46,7 @@
 
 	:global(span.player) {
 		background: var(--color-gray-100);
-		border: 2px solid var(--color-gray-400);
+		border: 2px solid var(--color-gray-300);
 		border-radius: 4px;
 		padding: 0px 4px;
 		white-space: nowrap;

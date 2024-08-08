@@ -4,7 +4,9 @@
 	import players from "$data/players.csv";
 	import Slope from "$components/Slope.svelte";
 	import Cards from "$components/Cards.svelte";
+	import Handwriting from "$components/Handwriting.svelte";
 
+	export let i;
 	export let id;
 	export let title;
 	export let text;
@@ -20,9 +22,13 @@
 </script>
 
 <section id={_.kebabCase(title)}>
-	<h2>{title}</h2>
+	<h2>
+		<Handwriting text={title} wonkiness={5} />
+	</h2>
 
 	<Slope
+		{i}
+		{id}
 		data={slopeData}
 		title={`Change in average attributes of batter #${id}`}
 	/>
@@ -48,6 +54,7 @@
 	h2 {
 		font-size: 3rem;
 		font-family: var(--handwriting);
+		text-transform: uppercase;
 		align-self: start;
 	}
 	.text {

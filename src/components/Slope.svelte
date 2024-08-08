@@ -6,6 +6,8 @@
 	import { LayerCake, Svg } from "layercake";
 	import _ from "lodash";
 
+	export let i;
+	export let id;
 	export let data;
 	export let title;
 
@@ -23,7 +25,7 @@
 	});
 </script>
 
-<div class="chart-container">
+<div class="chart-container" id={`chart-${id}`}>
 	<div class="chart-title">{title}</div>
 	<LayerCake
 		x={xKey}
@@ -40,7 +42,7 @@
 			<AxisX dy={20} />
 			<AxisY textAnchor={"end"} />
 			<AxisY gridlines={false} dxTick={"100%"} textAnchor={"start"} />
-			<Balls />
+			<Balls {i} {id} />
 		</Svg>
 	</LayerCake>
 </div>

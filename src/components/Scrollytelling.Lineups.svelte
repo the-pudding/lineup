@@ -1,4 +1,5 @@
 <script>
+	import Handwriting from "$components/Handwriting.svelte";
 	import toronto from "$data/toronto.csv";
 	import _ from "lodash";
 	import { scaleLinear } from "d3-scale";
@@ -16,8 +17,8 @@
 		}
 	];
 
-	const startColor = "indianred";
-	const endColor = "lightgreen";
+	const startColor = "rgba(255,0,0,0.4)";
+	const endColor = "rgba(0,255,0,0.4)";
 	const colorScale = scaleLinear()
 		.domain([0, 5])
 		.interpolate(interpolateRgb)
@@ -43,6 +44,11 @@
 						>{lineup === "old" ? 1993 : `"2024"`} Toronto Blue Jays</th
 					>
 				</tr>
+				<tr class="head-2">
+					<td>Pos.</td>
+					<td>Player</td>
+					<td>Attributes</td>
+				</tr>
 				{#each data as { name, average, power, walks, speed }, i}
 					{@const stats = { average, power, walks, speed }}
 					{@const faded = highlights.find(
@@ -51,13 +57,13 @@
 					<tr class:faded>
 						<td>{i + 1}</td>
 						<td class="name">
-							{name}
+							<Handwriting text={name.split(" ")[1]} wonkiness={3} />
 						</td>
 						<td class="contains-table">
 							<table class="inner">
 								<tr class="top">
 									{#each attr as a}
-										<td>{_.startCase(a)}</td>
+										<td>{a === "average" ? "avg" : a}</td>
 									{/each}
 								</tr>
 								<tr class="bottom">
@@ -89,8 +95,17 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 0 0.5rem;
+		padding: 0.5rem;
+		background: white;
+		border: 4px solid black;
 		opacity: 0;
 		transition: opacity 0.5s;
+	}
+	.old .outer {
+		border: 2px solid dodgerblue;
+	}
+	.new .outer {
+		border: 2px solid darkblue;
 	}
 	.visible {
 		opacity: 1;
@@ -101,15 +116,19 @@
 	table {
 		width: 100%;
 		table-layout: auto;
+		font-family: var(--serif);
+		text-transform: uppercase;
 	}
 	td {
 		padding: 0 4px;
 		white-space: nowrap;
 		vertical-align: middle;
+		text-align: center;
 	}
 	td.name {
 		font-family: var(--handwriting);
-		font-size: 1.5rem;
+		font-size: 1.3rem;
+		text-align: left;
 	}
 	td.contains-table {
 		padding: 0;
@@ -128,7 +147,12 @@
 		transition: opacity 0.5s;
 	}
 	tr.head {
-		background: var(--color-gray-200);
+		font-family: var(--sans);
+		font-size: 1.2rem;
+		border: none;
+	}
+	tr.head-2 td {
+		font-size: 0.8rem;
 	}
 	tr.faded {
 		opacity: 0.2;
@@ -141,15 +165,14 @@
 	}
 	.bottom {
 		border-bottom: 0px;
+		font-family: var(--handwriting);
+		font-size: 1rem;
 	}
 	.top,
 	.bottom {
 		border-right: 0px;
 	}
-	.top td {
-		background: var(--color-gray-200);
-	}
 	table.inner {
-		font-size: 0.75rem;
+		font-size: 0.8rem;
 	}
 </style>

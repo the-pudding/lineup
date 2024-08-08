@@ -1,4 +1,5 @@
 <script>
+	import Handwriting from "$components/Handwriting.svelte";
 	import Scrollytelling from "$components/Scrollytelling.svelte";
 	import Sections from "$components/Sections.svelte";
 	import Footer from "$components/Footer.svelte";
@@ -9,7 +10,12 @@
 </script>
 
 <article>
-	<h1>{copy.hed}</h1>
+	<img src="assets/hero.png" style="height: 25rem; margin: auto" />
+
+	<h1>
+		<Handwriting text={copy.hed} />
+	</h1>
+
 	<div class="byline">{@html copy.byline}</div>
 
 	{#each copy.body as { type, value }}
@@ -21,7 +27,9 @@
 			<Sections sections={value} />
 		{:else if type === "methods"}
 			<section id="methods">
-				<h3>Methodology</h3>
+				<h2>
+					<Handwriting text="Methodology" wonkiness={8} />
+				</h2>
 				{#each value as { value }}
 					<p>{@html value}</p>
 				{/each}
@@ -34,12 +42,14 @@
 
 <style>
 	h1 {
-		font-family: var(--handwriting);
-		font-size: 3.5rem;
-		max-width: 1000px;
-		margin: 0 auto;
-		margin-bottom: 2rem;
-		text-align: center;
+		text-transform: uppercase;
+		font-size: 5rem;
+		max-width: 750px;
+		margin: 3rem auto;
+	}
+	h2 {
+		font-size: 3rem;
+		text-transform: uppercase;
 	}
 	.byline {
 		margin-bottom: 5rem;

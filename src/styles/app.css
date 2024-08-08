@@ -10,7 +10,7 @@
 		sans-serif;
 	--serif: "Tiempos Text Web", Iowan Old Style, Times New Roman, Times, serif;
 	--mono: "Inconsolata", Menlo, Consolas, Monaco, monospace;
-	--handwriting: "Caveat";
+	--handwriting: "Sue Ellen San Francisco";
 
 	/* z-index */
 	--z-bottom: -100;
@@ -95,5 +95,6 @@ h6 {
 }
 
 a {
+	color: var(--color-fg);
 	font-weight: bold;
 }

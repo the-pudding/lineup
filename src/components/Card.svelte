@@ -9,19 +9,23 @@
 	export let rank;
 	export let blurb;
 
-	let zIndex = 3 - rank;
+	let zIndex = 3 - i;
 	let cardEl;
 	let cardWidth;
 	let dx;
 	let dy;
 
 	const cardHeight = 250;
+	const cardHeightEnlarged = 600;
 	const angles = [-2, 5, -10];
 	const ys = [0, 0, 0];
 
 	const onClick = () => {
 		dx = $viewport.width / 2 - cardEl.getBoundingClientRect().left - cardWidth;
-		dy = $viewport.height / 2 - cardEl.getBoundingClientRect().top - cardHeight;
+		dy =
+			$viewport.height / 2 -
+			cardEl.getBoundingClientRect().top -
+			cardHeightEnlarged / 2;
 
 		if (!$selectedCard) $selectedCard = name;
 		else $selectedCard = undefined;
@@ -48,8 +52,7 @@
 	style:z-index={flipped ? 1000 : zIndex}
 	style="--y-offset: {ys[i]}px; --angle: {angles[
 		i
-	]}deg; --card-height: {cardHeight}px; --card-height-enlarged: {cardHeight *
-		2}px; --dx: {dx}px; --dy: {dy}px; --flip-speed: 0.5s"
+	]}deg; --card-height: {cardHeight}px; --card-height-enlarged: {cardHeightEnlarged}px; --dx: {dx}px; --dy: {dy}px; --flip-speed: 0.5s"
 	on:click={onClick}
 	on:keydown={onKeyDown}
 	role="button"

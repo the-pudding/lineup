@@ -3,7 +3,7 @@
 	import Section from "$components/Section.svelte";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";
-	import { selectedCard } from "$stores/misc.js";
+	import { selectedCard, currentSection } from "$stores/misc.js";
 	import _ from "lodash";
 
 	export let sections;
@@ -17,20 +17,19 @@
 		5: [7, 8]
 	};
 	let progressVisible = false;
-	let currentSection = 0;
 
 	const resetCard = () => {
 		$selectedCard = undefined;
 	};
 
-	$: currentSection, resetCard();
+	$: $currentSection, resetCard();
 </script>
 
 <div class="progress" class:visible={progressVisible}>
 	{#each _.range(9) as i}
 		{@const active =
-			currentSection !== undefined
-				? activeSections[currentSection].includes(i)
+			$currentSection !== undefined
+				? activeSections[$currentSection].includes(i)
 				: false}
 		<div class="block" class:active />
 	{/each}
@@ -42,9 +41,9 @@
 	on:enter={() => (progressVisible = true)}
 	on:exit={() => (progressVisible = false)}
 >
-	<Scrolly bind:value={currentSection}>
-		{#each sections as props}
-			<Section {...props} />
+	<Scrolly bind:value={$currentSection}>
+		{#each sections as props, i}
+			<Section {...props} {i} />
 		{/each}
 	</Scrolly>
 </div>

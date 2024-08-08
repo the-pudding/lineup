@@ -1,35 +1,43 @@
 <script>
-	import { getContext } from "svelte";
+	import { getContext, onMount } from "svelte";
+	import rough from "roughjs";
+	import { currentSection } from "$stores/misc.js";
+
 	const { data, yScale, zScale, xGet, x } = getContext("LayerCake");
+
+	export let i;
+	export let id;
 
 	const r = 7;
 
-	const lightenHex = (hex, percent = 0.5) => {
-		hex = hex.replace(/^#/, "");
-		let bigint = parseInt(hex, 16);
-		let r = (bigint >> 16) & 255;
-		let g = (bigint >> 8) & 255;
-		let b = bigint & 255;
-
-		r = Math.min(255, Math.floor(r + (255 - r) * percent));
-		g = Math.min(255, Math.floor(g + (255 - g) * percent));
-		b = Math.min(255, Math.floor(b + (255 - b) * percent));
-
-		return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
-	};
-	const darkenHex = (hex, percent = 0.5) => {
-		hex = hex.replace(/^#/, "");
-		let bigint = parseInt(hex, 16);
-		let r = (bigint >> 16) & 255;
-		let g = (bigint >> 8) & 255;
-		let b = bigint & 255;
-
-		r = Math.max(0, Math.floor(r * (1 - percent)));
-		g = Math.max(0, Math.floor(g * (1 - percent)));
-		b = Math.max(0, Math.floor(b * (1 - percent)));
-
-		return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
-	};
+	onMount(() => {
+		// const svg = document.querySelector(`#chart-${id} svg`);
+		// const rc = rough.svg(svg);
+		// $zScale.domain().forEach((attr) => {
+		// 	const x1 = $xGet($data[0]) + 75;
+		// 	const y1 = $yScale($data[0][attr]) + 25;
+		// 	const x2 = $xGet($data[1]) + 75;
+		// 	const y2 = $yScale($data[1][attr]) + 25;
+		// 	const line = rc.line(x1, y1, x2, y2, {
+		// 		stroke: $zScale(attr),
+		// 		roughness: 1,
+		// 		strokeWidth: 3
+		// 	});
+		// 	const leftCircle = rc.circle(x1, y1, 15, {
+		// 		stroke: $zScale(attr),
+		// 		roughness: 1,
+		// 		strokeWidth: 3
+		// 	});
+		// 	const rightCircle = rc.circle(x2, y2, 15, {
+		// 		stroke: $zScale(attr),
+		// 		roughness: 1,
+		// 		strokeWidth: 3
+		// 	});
+		// 	svg.appendChild(line);
+		// 	svg.appendChild(leftCircle);
+		// 	svg.appendChild(rightCircle);
+		// });
+	});
 </script>
 
 {#each $data as d, i}
@@ -38,7 +46,7 @@
 		{@const right = i === $data.length - 1}
 		{@const next = $x(d) !== 2020 ? $data[i + 1] : null}
 		{#if next}
-			<line
+			<!-- <line
 				x1={$xGet(d)}
 				y1={$yScale(d[attr])}
 				x2={$xGet(next)}
@@ -46,10 +54,10 @@
 				stroke={$zScale(attr)}
 				stroke-width={r * 2}
 				opacity="0.6"
-			/>
+			/> -->
 		{/if}
 
-		<circle cx={$xGet(d)} cy={$yScale(d[attr])} {r} fill={$zScale(attr)} />
+		<!-- <circle cx={$xGet(d)} cy={$yScale(d[attr])} {r} fill={$zScale(attr)} /> -->
 
 		{#if left || right}
 			<text
@@ -66,8 +74,16 @@
 
 <style>
 	text {
-		font-family: var(--mono);
-		font-size: 0.8rem;
+		font-family: var(--handwriting);
+		font-size: 1.4rem;
 		alignment-baseline: middle;
+	}
+	line {
+		/* background-image: linear-gradient(
+			to right,
+			rgba(255, 225, 0, 0.1),
+			rgba(255, 225, 0, 0.7) 4%,
+			rgba(255, 225, 0, 0.3)
+		); */
 	}
 </style>

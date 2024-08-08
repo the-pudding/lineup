@@ -27,10 +27,19 @@
 		}),
 		"era"
 	);
+	const shuffle = () => {
+		eras.forEach((era) => {
+			dataCleaned[era.id] = [
+				dataCleaned[era.id][1],
+				dataCleaned[era.id][2],
+				dataCleaned[era.id][0]
+			];
+		});
+	};
 </script>
 
 <div class="cards">
-	{#each eras as era}
+	{#each eras as era, i}
 		<div class="era">
 			<div class="stack">
 				{#each dataCleaned[era.id] as card, i}
@@ -40,12 +49,17 @@
 			<div class="label">{era.name}</div>
 			<div class="sublabel">({era.id})</div>
 		</div>
+
+		{#if i === 0}
+			<button class="shuffle" on:click={shuffle}>shuffle</button>
+		{/if}
 	{/each}
 </div>
 
 <style>
 	.cards {
 		display: flex;
+		align-items: center;
 		width: 100%;
 		margin: 2.5rem 0;
 	}

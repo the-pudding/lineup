@@ -44,7 +44,7 @@
 	{/each}
 
 	{#if gridlines}
-		<line
+		<!-- <line
 			class="average"
 			x1="0"
 			x2={"100%"}
@@ -56,7 +56,7 @@
 			style="text-anchor:{textAnchor};"
 			x={-10}
 			y={$yScale(2.5)}>2.5 = average player</text
-		>
+		> -->
 	{/if}
 </g>
 

@@ -23,10 +23,24 @@
 		});
 		return obj;
 	});
+
+	const old = dataCleaned.find((d) => d.era === "1970-2009");
+	const neww = dataCleaned.find((d) => d.era === "2010-present");
+	const oldAvg =
+		(old["speed"] + old["average"] + old["power"] + old["walks"]) / 4;
+	const newAvg =
+		(neww["speed"] + neww["average"] + neww["power"] + neww["walks"]) / 4;
 </script>
+
+<div>Old avg: {oldAvg.toFixed(2)}</div>
+<div>New avg: {newAvg.toFixed(2)}</div>
+<div>
+	Change: {newAvg >= oldAvg ? "+" : ""}{(newAvg - oldAvg).toFixed(2)}
+</div>
 
 <div class="chart-container" id={`chart-${id}`}>
 	<div class="chart-title">{title}</div>
+
 	<LayerCake
 		x={xKey}
 		xScale={scalePoint()}

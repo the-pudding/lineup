@@ -11,32 +11,32 @@
 	const r = 7;
 
 	onMount(() => {
-		// const svg = document.querySelector(`#chart-${id} svg`);
-		// const rc = rough.svg(svg);
-		// $zScale.domain().forEach((attr) => {
-		// 	const x1 = $xGet($data[0]) + 75;
-		// 	const y1 = $yScale($data[0][attr]) + 25;
-		// 	const x2 = $xGet($data[1]) + 75;
-		// 	const y2 = $yScale($data[1][attr]) + 25;
-		// 	const line = rc.line(x1, y1, x2, y2, {
-		// 		stroke: $zScale(attr),
-		// 		roughness: 1,
-		// 		strokeWidth: 3
-		// 	});
-		// 	const leftCircle = rc.circle(x1, y1, 15, {
-		// 		stroke: $zScale(attr),
-		// 		roughness: 1,
-		// 		strokeWidth: 3
-		// 	});
-		// 	const rightCircle = rc.circle(x2, y2, 15, {
-		// 		stroke: $zScale(attr),
-		// 		roughness: 1,
-		// 		strokeWidth: 3
-		// 	});
-		// 	svg.appendChild(line);
-		// 	svg.appendChild(leftCircle);
-		// 	svg.appendChild(rightCircle);
-		// });
+		const svg = document.querySelector(`#chart-${id} svg`);
+		const rc = rough.svg(svg);
+		$zScale.domain().forEach((attr) => {
+			const x1 = $xGet($data[0]) + 75;
+			const y1 = $yScale($data[0][attr]) + 25;
+			const x2 = $xGet($data[1]) + 75;
+			const y2 = $yScale($data[1][attr]) + 25;
+			const line = rc.line(x1, y1, x2, y2, {
+				stroke: $zScale(attr),
+				roughness: 1,
+				strokeWidth: 3
+			});
+			const leftCircle = rc.circle(x1, y1, 15, {
+				stroke: $zScale(attr),
+				roughness: 1,
+				strokeWidth: 3
+			});
+			const rightCircle = rc.circle(x2, y2, 15, {
+				stroke: $zScale(attr),
+				roughness: 1,
+				strokeWidth: 3
+			});
+			svg.appendChild(line);
+			svg.appendChild(leftCircle);
+			svg.appendChild(rightCircle);
+		});
 	});
 </script>
 

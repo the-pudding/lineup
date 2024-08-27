@@ -10,19 +10,19 @@
 </script>
 
 <article>
-	<img src="assets/hero.png" style="height: 25rem; margin: auto" />
+	<!-- <img src="assets/hero.png" style="height: 25rem; margin: auto" />
 
 	<h1>
 		<Handwriting text={copy.hed} />
 	</h1>
 
-	<div class="byline">{@html copy.byline}</div>
+	<div class="byline">{@html copy.byline}</div> -->
 
 	{#each copy.body as { type, value }}
 		{#if type === "text"}
 			<p>{@html value}</p>
 		{:else if type === "scroll"}
-			<Scrollytelling steps={value} />
+			<!-- <Scrollytelling steps={value} /> -->
 		{:else if type === "sections"}
 			<Sections sections={value} />
 		{:else if type === "methods"}

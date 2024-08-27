@@ -1,15 +1,15 @@
 <script>
-	import playersData from "$data/players.csv";
-	import stats from "$data/stats.csv";
+	import stats from "$data/back-stats.csv";
 	import _ from "lodash";
 
-	export let name;
-	export let blurb;
+	export let info;
 	export let flipped;
+
+	const { name, height, weight, throws, bats, hometown, birthday, blurb } =
+		info;
 
 	const columns = ["season", "walks", "average", "power", "speed"];
 
-	$: info = playersData.find((d) => d.name === name);
 	$: seasons = stats.filter((d) => d.name === name);
 
 	const style = { bg: "#B5B69E", fg: "#44455D", main: "#C9BB35" };
@@ -21,20 +21,20 @@
 	style={`--card-bg: ${style.bg}; --card-fg: ${style.fg}; --card-main: ${style.main}`}
 >
 	<div class="name">
-		{info.name}
+		{name}
 	</div>
 
 	<div class="main">
 		<div class="info">
-			Height: 6’2’’ Weight: 190 Throws: Right Bats: Right Hometown: Wayland, MA
-			Born: 10/3/1954
+			Height: {height} Weight: {weight} Throws: {throws} Bats: {bats} Hometown: {hometown}
+			Born: {birthday}
 		</div>
 
 		<div class="fun">
 			<div
 				style="background: lightgrey; height: 100px; width: 100px; flex-shrink: 0; margin-right: .5rem"
 			></div>
-			<div>{blurb || `${info.name} was a great guy.`}</div>
+			<div>{@html blurb}</div>
 		</div>
 
 		<div class="table">

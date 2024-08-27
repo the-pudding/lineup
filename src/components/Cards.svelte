@@ -3,39 +3,19 @@
 	import _ from "lodash";
 
 	export let data;
-	export let id;
 
 	const eras = [
 		{ id: "1970-2009", name: "Pre-Stats" },
 		{ id: "2010-present", name: "Post-Stats" }
 	];
-	const attributes = [
-		"win_shares",
-		"average",
-		"power",
-		"walks",
-		"speed",
-		"pct_at_slot",
-		"rank"
-	];
-	const dataCleaned = _.groupBy(
-		data.map((d) => {
-			const obj = d;
-			attributes.forEach((attr) => {
-				obj[attr] = +d[attr];
-			});
-			return obj;
-		}),
-		"era"
-	);
-	const shuffle = () => {
-		eras.forEach((era) => {
-			dataCleaned[era.id] = [
-				dataCleaned[era.id][1],
-				dataCleaned[era.id][2],
-				dataCleaned[era.id][0]
-			];
-		});
+	const dataCleaned = _.groupBy(data, "era");
+
+	const shuffle = (era) => {
+		dataCleaned[era.id] = [
+			dataCleaned[era.id][1],
+			dataCleaned[era.id][2],
+			dataCleaned[era.id][0]
+		];
 	};
 </script>
 
@@ -44,16 +24,14 @@
 		<div class="era">
 			<div class="stack">
 				{#each dataCleaned[era.id] as card, i}
-					<Card {...card} {i} {id} />
+					<Card {i} id={_.kebabCase(card.name)} info={{ ...card }} />
 				{/each}
 			</div>
 			<div class="label">{era.name}</div>
 			<div class="sublabel">({era.id})</div>
-		</div>
 
-		{#if i === 0}
-			<button class="shuffle" on:click={shuffle}>shuffle</button>
-		{/if}
+			<button class="shuffle" on:click={() => shuffle(era)}>shuffle</button>
+		</div>
 	{/each}
 </div>
 

@@ -4,11 +4,9 @@
 	import { selectedCard } from "$stores/misc.js";
 	import _ from "lodash";
 
-	export let id;
 	export let i;
-	export let name;
-	export let era;
-	export let blurb;
+	export let id;
+	export let info;
 
 	let zIndex = 3 - i;
 	let cardEl;
@@ -28,7 +26,7 @@
 			cardEl.getBoundingClientRect().top -
 			cardHeightEnlarged / 2;
 
-		if (!$selectedCard) $selectedCard = name;
+		if (!$selectedCard) $selectedCard = id;
 		else $selectedCard = undefined;
 	};
 	const onKeyDown = (event) => {
@@ -38,9 +36,9 @@
 		}
 	};
 
-	$: flipped = $selectedCard === name;
-	$: disabled = $selectedCard && $selectedCard !== name;
-	$: imgSrc = `assets/cards/batting${id}/${era === "1970-2009" ? "old" : "new"}-${i + 1}.png`;
+	$: flipped = $selectedCard === id;
+	$: disabled = $selectedCard && $selectedCard !== id;
+	$: imgSrc = `assets/cards/${id}.png`;
 </script>
 
 {#if i === 0}
@@ -64,10 +62,12 @@
 >
 	<div class="placeholder" />
 	<div class="back">
-		<Back {name} {blurb} {flipped} />
+		{#key info}
+			<Back {info} {flipped} />
+		{/key}
 	</div>
 	<div class="front">
-		<img src={imgSrc} alt={`Baseball card of ${name}`} />
+		<img src={imgSrc} alt={`Baseball card of ${info.name}`} />
 	</div>
 </div>
 

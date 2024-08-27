@@ -2,11 +2,12 @@
 	import Back from "$components/Card.Back.svelte";
 	import viewport from "$stores/viewport.js";
 	import { selectedCard } from "$stores/misc.js";
+	import _ from "lodash";
 
+	export let id;
 	export let i;
 	export let name;
 	export let era;
-	export let rank;
 	export let blurb;
 
 	let zIndex = 3 - i;
@@ -39,6 +40,7 @@
 
 	$: flipped = $selectedCard === name;
 	$: disabled = $selectedCard && $selectedCard !== name;
+	$: imgSrc = `assets/cards/batting${id}/${era === "1970-2009" ? "old" : "new"}-${i + 1}.png`;
 </script>
 
 {#if i === 0}
@@ -65,10 +67,7 @@
 		<Back {name} {blurb} {flipped} />
 	</div>
 	<div class="front">
-		<img
-			src={`assets/cards/${era === "1970-2009" ? "old" : "new"}-${rank}.png`}
-			alt={`Baseball card of ${name}`}
-		/>
+		<img src={imgSrc} alt={`Baseball card of ${name}`} />
 	</div>
 </div>
 

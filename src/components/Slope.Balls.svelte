@@ -1,9 +1,8 @@
 <script>
 	import { getContext, onMount } from "svelte";
 	import rough from "roughjs";
-	import { currentSection } from "$stores/misc.js";
 
-	const { data, yScale, zScale, xGet, x } = getContext("LayerCake");
+	const { data, yScale, zScale, xGet, x, xScale } = getContext("LayerCake");
 
 	export let i;
 	export let id;
@@ -37,6 +36,13 @@
 			svg.appendChild(leftCircle);
 			svg.appendChild(rightCircle);
 		});
+
+		const oldAvg =
+			($data[0].speed + $data[0].average + $data[0].walks + $data[0].power) / 4;
+		const newAvg =
+			($data[1].speed + $data[1].average + $data[1].walks + $data[1].power) / 4;
+		const x1 = $xScale(oldAvg);
+		// TODO: draw average line
 	});
 </script>
 
@@ -44,21 +50,6 @@
 	{#each $zScale.domain() as attr}
 		{@const left = i === 0}
 		{@const right = i === $data.length - 1}
-		{@const next = $x(d) !== 2020 ? $data[i + 1] : null}
-		{#if next}
-			<!-- <line
-				x1={$xGet(d)}
-				y1={$yScale(d[attr])}
-				x2={$xGet(next)}
-				y2={$yScale(next[attr])}
-				stroke={$zScale(attr)}
-				stroke-width={r * 2}
-				opacity="0.6"
-			/> -->
-		{/if}
-
-		<!-- <circle cx={$xGet(d)} cy={$yScale(d[attr])} {r} fill={$zScale(attr)} /> -->
-
 		{#if left || right}
 			<text
 				x={$xGet(d) + (left ? -(r * 2) : r * 2)}
@@ -77,13 +68,5 @@
 		font-family: var(--handwriting);
 		font-size: 1.4rem;
 		alignment-baseline: middle;
-	}
-	line {
-		/* background-image: linear-gradient(
-			to right,
-			rgba(255, 225, 0, 0.1),
-			rgba(255, 225, 0, 0.7) 4%,
-			rgba(255, 225, 0, 0.3)
-		); */
 	}
 </style>

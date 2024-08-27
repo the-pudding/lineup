@@ -3,6 +3,7 @@
 	import _ from "lodash";
 
 	export let data;
+	export let id;
 
 	const eras = [
 		{ id: "1970-2009", name: "Pre-Stats" },
@@ -43,7 +44,7 @@
 		<div class="era">
 			<div class="stack">
 				{#each dataCleaned[era.id] as card, i}
-					<Card {...card} {i} />
+					<Card {...card} {i} {id} />
 				{/each}
 			</div>
 			<div class="label">{era.name}</div>

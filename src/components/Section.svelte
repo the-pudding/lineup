@@ -41,7 +41,7 @@
 		</div>
 	{/if}
 
-	<Cards data={playersData} />
+	<Cards data={playersData} {id} />
 </section>
 
 <style>

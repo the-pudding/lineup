@@ -23,6 +23,15 @@
 			<Scrollytelling steps={value} />
 		{:else if type === "sections"}
 			<Sections sections={value} />
+		{:else if type === "credits"}
+			<section id="credits">
+				<h2>
+					<Handwriting text="Credits" wonkiness={8} />
+				</h2>
+				{#each value as { value }}
+					<p>{@html value}</p>
+				{/each}
+			</section>
 		{:else if type === "methods"}
 			<section id="methods">
 				<h2>
@@ -57,10 +66,11 @@
 		max-width: 630px;
 		margin: 1rem auto;
 	}
-	#methods {
+	section {
 		max-width: 630px;
-		margin: 0 auto;
-		margin-top: 5rem;
-		margin-bottom: 10rem;
+		margin: 4rem auto;
+	}
+	#credits {
+		margin-top: 8rem;
 	}
 </style>

@@ -5,6 +5,7 @@
 	import Slope from "$components/Slope.svelte";
 	import Cards from "$components/Cards.svelte";
 	import Handwriting from "$components/Handwriting.svelte";
+	import { loadedSections } from "$stores/misc.js";
 
 	export let i;
 	export let id;
@@ -13,6 +14,8 @@
 
 	const slopeData = slope.filter((d) => d.slot === id);
 	const cardsData = cards.filter((d) => d.slot === id);
+
+	$: loaded = $loadedSections[i];
 </script>
 
 <section id={_.kebabCase(title)}>
@@ -21,7 +24,7 @@
 	</h2>
 
 	<Slope
-		{i}
+		sectionI={i}
 		{id}
 		data={slopeData}
 		title={`Change in average attributes of batter #${id}`}
@@ -35,7 +38,9 @@
 		</div>
 	{/if}
 
-	<Cards data={cardsData} />
+	{#if loaded}
+		<Cards data={cardsData} />
+	{/if}
 </section>
 
 <style>

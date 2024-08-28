@@ -5,8 +5,9 @@
 	import { scaleOrdinal, scalePoint } from "d3-scale";
 	import { LayerCake, Svg } from "layercake";
 	import _ from "lodash";
+	import { loadedSections } from "$stores/misc.js";
 
-	export let i;
+	export let sectionI;
 	export let id;
 	export let data;
 	export let title;
@@ -30,13 +31,9 @@
 		(old["speed"] + old["average"] + old["power"] + old["walks"]) / 4;
 	const newAvg =
 		(neww["speed"] + neww["average"] + neww["power"] + neww["walks"]) / 4;
-</script>
 
-<div>Old avg: {oldAvg.toFixed(2)}</div>
-<div>New avg: {newAvg.toFixed(2)}</div>
-<div>
-	Change: {newAvg >= oldAvg ? "+" : ""}{(newAvg - oldAvg).toFixed(2)}
-</div>
+	$: loaded = $loadedSections[sectionI];
+</script>
 
 <div class="chart-container" id={`chart-${id}`}>
 	<div class="chart-title">{title}</div>
@@ -56,7 +53,10 @@
 			<AxisX dy={20} />
 			<AxisY textAnchor={"end"} />
 			<AxisY gridlines={false} dxTick={"100%"} textAnchor={"start"} />
-			<Balls {i} {id} />
+
+			{#if loaded}
+				<Balls {id} />
+			{/if}
 		</Svg>
 	</LayerCake>
 </div>

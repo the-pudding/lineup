@@ -3,8 +3,13 @@
 	import Section from "$components/Section.svelte";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";
-	import { selectedCard, currentSection } from "$stores/misc.js";
+	import {
+		selectedCard,
+		currentSection,
+		loadedSections
+	} from "$stores/misc.js";
 	import _ from "lodash";
+	import { onMount } from "svelte";
 
 	export let sections;
 
@@ -16,13 +21,30 @@
 		4: [4, 5, 6],
 		5: [7, 8]
 	};
+
 	let progressVisible = false;
+
+	const load = (section) => {
+		$loadedSections[section] = true;
+	};
 
 	const resetCard = () => {
 		$selectedCard = undefined;
+
+		if (
+			$currentSection + 1 < 6 &&
+			!$loadedSections[$currentSection + 1] &&
+			$currentSection !== undefined
+		) {
+			load($currentSection + 1);
+		}
 	};
 
 	$: $currentSection, resetCard();
+
+	onMount(() => {
+		load(0); // TODO: why does this happen twice?
+	});
 </script>
 
 <div class="progress" class:visible={progressVisible}>

@@ -37,7 +37,7 @@
 
 		<div class="fun">
 			<figure class="img-wrapper">
-				<img src={`assets/back-images/${id}.webp`} />
+				<img src={`assets/back-images/${id}.png`} />
 				<figcaption>This image is AI-generated.</figcaption>
 			</figure>
 			<div class="fact-text">{@html blurb}</div>

@@ -25,11 +25,16 @@
 	let progressVisible = false;
 
 	const load = (section) => {
+		console.log("load", section);
 		$loadedSections[section] = true;
 	};
 
-	const resetCard = () => {
+	const sectionChange = () => {
 		$selectedCard = undefined;
+
+		if (!$loadedSections[$currentSection]) {
+			load($currentSection);
+		}
 
 		if (
 			$currentSection + 1 < 6 &&
@@ -40,10 +45,10 @@
 		}
 	};
 
-	$: $currentSection, resetCard();
+	$: $currentSection, sectionChange();
 
 	onMount(() => {
-		load(0); // TODO: why does this happen twice?
+		load(0);
 	});
 </script>
 

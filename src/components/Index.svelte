@@ -5,9 +5,12 @@
 	import Footer from "$components/Footer.svelte";
 	import _ from "lodash";
 	import copy from "$data/copy.json";
+	import BarCharts from "$components/BarCharts.svelte";
 </script>
 
-<article>
+<BarCharts />
+
+<!-- <article>
 	<img src="assets/hero.png" style="height: 25rem; margin: auto" />
 
 	<h1>
@@ -45,7 +48,7 @@
 	{/each}
 
 	<Footer />
-</article>
+</article> -->
 
 <style>
 	h1 {

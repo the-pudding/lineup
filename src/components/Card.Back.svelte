@@ -15,7 +15,6 @@
 	const download = (e) => {
 		e.stopPropagation();
 		const csvContent = csvDownload(forDownload);
-
 		const link = document.createElement("a");
 		link.href = csvContent;
 		link.download = `${id}.csv`;
@@ -24,7 +23,7 @@
 		document.body.removeChild(link);
 	};
 
-	$: seasons = stats.filter((d) => d.name === name);
+	$: seasons = stats.filter((d) => _.deburr(d.name) === _.deburr(name));
 	$: forDownload = seasons.map((d) => ({
 		season: d.season,
 		walks: d.walks,
@@ -32,6 +31,8 @@
 		power: d.power,
 		speed: d.speed
 	}));
+
+	$: if (seasons.length === 0 || !seasons) console.log({ id, seasons });
 </script>
 
 <div

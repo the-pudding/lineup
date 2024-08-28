@@ -12,14 +12,13 @@
 	const dataCleaned = _.groupBy(data, "era");
 
 	const shuffle = (era) => {
-		dataCleaned[era.id] = [
-			dataCleaned[era.id][1],
-			dataCleaned[era.id][2],
-			dataCleaned[era.id][0]
-		];
+		const elements = dataCleaned[era.id];
+		if (!elements || elements.length < 2) return;
+		dataCleaned[era.id] = elements.slice(1).concat(elements[0]);
 	};
 </script>
 
+<div class="click">Click on a card to flip it over and see the back!</div>
 <div class="cards">
 	{#each eras as era, i}
 		<div class="era">
@@ -41,6 +40,10 @@
 </div>
 
 <style>
+	.click {
+		color: var(--color-gray-700);
+		margin-bottom: 1rem;
+	}
 	.cards {
 		display: flex;
 		align-items: center;

@@ -2,6 +2,7 @@
 	import stats from "$data/back-stats.csv";
 	import _ from "lodash";
 
+	export let id;
 	export let info;
 	export let flipped;
 
@@ -12,7 +13,7 @@
 
 	$: seasons = stats.filter((d) => d.name === name);
 
-	const style = { bg: "#B5B69E", fg: "#44455D", main: "#C9BB35" };
+	const style = { bg: "#B5B69E", fg: "#44455D", main: "#eee9e9" }; // main: #C9BB35
 </script>
 
 <div
@@ -26,15 +27,20 @@
 
 	<div class="main">
 		<div class="info">
-			Height: {height} Weight: {weight} Throws: {throws} Bats: {bats} Hometown: {hometown}
-			Born: {birthday}
+			<span>Height: {height}</span>
+			<span>Weight: {weight}lbs</span>
+			<span>Bats: {bats}</span>
+			<span>Throws: {throws}</span>
+			<span>Hometown: {hometown}</span>
+			<span>Birthday: {birthday}</span>
 		</div>
 
 		<div class="fun">
-			<div
-				style="background: lightgrey; height: 100px; width: 100px; flex-shrink: 0; margin-right: .5rem"
-			></div>
-			<div>{@html blurb}</div>
+			<figure class="img-wrapper">
+				<img src={`assets/back-images/${id}.webp`} />
+				<figcaption>This image is AI-generated.</figcaption>
+			</figure>
+			<div class="fact-text">{@html blurb}</div>
 		</div>
 
 		<div class="table">
@@ -121,14 +127,19 @@
 		justify-content: space-between;
 	}
 	.info {
-		text-align: center;
 		font-size: 0.75rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.info span {
+		margin: 0 0.5rem;
 	}
 	.fun {
 		display: flex;
 		align-items: center;
 		margin: 1rem 0;
-		text-align: center;
+		gap: 1rem;
 	}
 	.table {
 		overflow: scroll;
@@ -136,6 +147,17 @@
 	}
 	.download {
 		font-size: 0.75rem;
+	}
+	figure {
+		height: 135px;
+		width: 135px;
+		flex-shrink: 0;
+	}
+	figcaption {
+		margin-top: 2px;
+		font-size: 10px;
+		color: var(--color-gray-600);
+		text-align: center;
 	}
 
 	table {

@@ -63,7 +63,7 @@
 	<div class="placeholder" />
 	<div class="back">
 		{#key info}
-			<Back {info} {flipped} />
+			<Back {id} {info} {flipped} />
 		{/key}
 	</div>
 	<div class="front">

@@ -1,6 +1,7 @@
 <script>
 	import stats from "$data/back-stats.csv";
 	import _ from "lodash";
+	import csvDownload from "$utils/csvDownload.js";
 
 	export let id;
 	export let info;
@@ -8,12 +9,29 @@
 
 	const { name, height, weight, throws, bats, hometown, birthday, blurb } =
 		info;
-
 	const columns = ["season", "walks", "average", "power", "speed"];
+	const style = { bg: "#B5B69E", fg: "#44455D", main: "#eee9e9" }; // main: #C9BB35
+
+	const download = (e) => {
+		e.stopPropagation();
+		const csvContent = csvDownload(forDownload);
+
+		const link = document.createElement("a");
+		link.href = csvContent;
+		link.download = `${id}.csv`;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	};
 
 	$: seasons = stats.filter((d) => d.name === name);
-
-	const style = { bg: "#B5B69E", fg: "#44455D", main: "#eee9e9" }; // main: #C9BB35
+	$: forDownload = seasons.map((d) => ({
+		season: d.season,
+		walks: d.walks,
+		average: d.average,
+		power: d.power,
+		speed: d.speed
+	}));
 </script>
 
 <div
@@ -75,7 +93,7 @@
 			</table>
 		</div>
 
-		<div class="download">Download data</div>
+		<button class="download" on:click={download}>Download data</button>
 	</div>
 </div>
 

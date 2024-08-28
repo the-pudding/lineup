@@ -1,6 +1,7 @@
 <script>
 	import Card from "$components/Card.svelte";
 	import _ from "lodash";
+	import { selectedCard } from "$stores/misc.js";
 
 	export let data;
 
@@ -30,7 +31,11 @@
 			<div class="label">{era.name}</div>
 			<div class="sublabel">({era.id})</div>
 
-			<button class="shuffle" on:click={() => shuffle(era)}>shuffle</button>
+			<button
+				class="shuffle"
+				on:click={() => shuffle(era)}
+				disabled={$selectedCard}>shuffle</button
+			>
 		</div>
 	{/each}
 </div>

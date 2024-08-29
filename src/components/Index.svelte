@@ -8,9 +8,9 @@
 	import BarCharts from "$components/BarCharts.svelte";
 </script>
 
-<BarCharts />
+<!-- <BarCharts /> -->
 
-<!-- <article>
+<article>
 	<img src="assets/hero.png" style="height: 25rem; margin: auto" />
 
 	<h1>
@@ -48,7 +48,7 @@
 	{/each}
 
 	<Footer />
-</article> -->
+</article>
 
 <style>
 	h1 {

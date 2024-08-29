@@ -35,7 +35,7 @@
 	$: loaded = $loadedSections[sectionI];
 </script>
 
-<div class="chart-container" id={`chart-${id}`}>
+<div class="slope chart-container" id={`chart-${id}`}>
 	<div class="chart-title">{title}</div>
 
 	<LayerCake
@@ -71,5 +71,12 @@
 	}
 	.chart-title {
 		font-weight: bold;
+	}
+	:global(.slope .x-axis text) {
+		font-size: 18px;
+	}
+	:global(.slope .y-axis text) {
+		font-size: 14px;
+		alignment-baseline: mathematical;
 	}
 </style>

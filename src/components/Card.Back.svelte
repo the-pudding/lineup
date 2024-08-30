@@ -2,6 +2,8 @@
 	import stats from "$data/back-stats.csv";
 	import _ from "lodash";
 	import csvDownload from "$utils/csvDownload.js";
+	import { scaleLinear } from "d3-scale";
+	import { interpolateRgb } from "d3-interpolate";
 
 	export let id;
 	export let info;
@@ -22,6 +24,13 @@
 		link.click();
 		document.body.removeChild(link);
 	};
+
+	const startColor = "rgba(255,0,0,0.4)";
+	const endColor = "rgba(0,255,0,0.4)";
+	const colorScale = scaleLinear()
+		.domain([0, 5])
+		.interpolate(interpolateRgb)
+		.range([startColor, endColor]);
 
 	$: seasons = stats.filter((d) => _.deburr(d.name) === _.deburr(name));
 	$: forDownload = seasons.map((d) => ({
@@ -79,7 +88,11 @@
 				{#each seasons as season}
 					<tr>
 						{#each columns as column}
-							<td>{season[column]}</td>
+							<td
+								style:background={column === "season"
+									? ""
+									: colorScale(season[column])}>{season[column]}</td
+							>
 						{/each}
 					</tr>
 				{/each}
@@ -88,7 +101,11 @@
 					{#each columns as column, i}
 						{@const average =
 							seasons.reduce((acc, d) => acc + +d[column], 0) / seasons.length}
-						<td class="average">{i === 0 ? "" : average.toFixed(1)}</td>
+						<td
+							class="average"
+							style:background={i === 0 ? "" : colorScale(average.toFixed(1))}
+							>{i === 0 ? "" : average.toFixed(1)}</td
+						>
 					{/each}
 				</tr>
 			</table>
@@ -186,11 +203,13 @@
 	}
 	th {
 		font-weight: bold;
+		text-align: center;
 		text-transform: uppercase;
 		padding: 0;
 	}
 	td {
 		padding: 0;
+		text-align: center;
 	}
 	tr:first-of-type,
 	tr:nth-last-of-type(2) {

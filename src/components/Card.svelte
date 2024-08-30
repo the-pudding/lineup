@@ -7,8 +7,9 @@
 	export let i;
 	export let id;
 	export let info;
+	export let zIndex;
+	export let maxZIndex;
 
-	let zIndex = 3 - i;
 	let cardEl;
 	let cardWidth;
 	let dx;
@@ -37,7 +38,7 @@
 	};
 
 	$: flipped = $selectedCard === id;
-	$: disabled = $selectedCard && $selectedCard !== id;
+	$: disabled = zIndex < maxZIndex || ($selectedCard && $selectedCard !== id);
 	$: imgSrc = `assets/cards/${id}.png`;
 </script>
 

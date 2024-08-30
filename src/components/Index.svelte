@@ -73,4 +73,7 @@
 	#credits {
 		margin-top: 8rem;
 	}
+	:global(#credits a) {
+		white-space: nowrap;
+	}
 </style>

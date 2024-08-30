@@ -178,7 +178,9 @@
 		color: var(--color-gray-600);
 		text-align: center;
 	}
-
+	img {
+		filter: grayscale(100%);
+	}
 	table {
 		font-family: var(--mono);
 	}

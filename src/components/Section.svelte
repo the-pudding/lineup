@@ -39,7 +39,7 @@
 	{/if}
 
 	{#if loaded}
-		<Cards data={cardsData} />
+		<Cards data={cardsData} {id} />
 	{/if}
 </section>
 

@@ -1,100 +1,82 @@
 <script>
 	import Handwriting from "$components/Handwriting.svelte";
-	import toronto from "$data/toronto.csv";
 	import _ from "lodash";
 	import { scaleLinear } from "d3-scale";
 	import { interpolateRgb } from "d3-interpolate";
+	import { flip } from "svelte/animate";
 
+	export let era;
+	export let year;
+	export let visible;
+	export let data;
+	export let highlights;
 	export let step;
 
 	const attr = ["average", "power", "walks", "speed"];
-	const stepShowModern = 4;
-	const highlights = [
-		{
-			step: 1,
-			era: "old",
-			name: "Joe Carter"
-		}
-	];
-
 	const startColor = "rgba(255,0,0,0.4)";
 	const endColor = "rgba(0,255,0,0.4)";
 	const colorScale = scaleLinear()
 		.domain([0, 5])
 		.interpolate(interpolateRgb)
 		.range([startColor, endColor]);
-
-	toronto.forEach((d) => {
-		[...attr, "oldSlot", "newSlot"].forEach((a) => {
-			d[a] = +d[a];
-		});
-	});
 </script>
 
-<div class="lineups">
-	{#each ["old", "new"] as lineup}
-		{@const data = _.orderBy(toronto, lineup === "old" ? "oldSlot" : "newSlot")}
-		<div
-			class={lineup}
-			class:visible={lineup === "old" || step >= stepShowModern}
-		>
-			<table class="outer">
-				<tr class="head">
-					<th colspan="3"
-						>{lineup === "old" ? 1993 : `"2024"`} Toronto Blue Jays</th
-					>
-				</tr>
-				<tr class="head-2">
-					<td>Pos.</td>
-					<td>Player</td>
-					<td>Attributes</td>
-				</tr>
-				{#each data as { name, average, power, walks, speed }, i}
-					{@const stats = { average, power, walks, speed }}
-					{@const faded = highlights.find(
-						(d) => d.step === step && d.era === lineup && d.name !== name
-					)}
-					<tr class:faded>
-						<td>{i + 1}</td>
-						<td class="name">
-							<Handwriting text={name.split(" ")[1]} wonkiness={3} />
-						</td>
-						<td class="contains-table">
-							<table class="inner">
-								<tr class="top">
-									{#each attr as a}
-										<td>{a === "average" ? "avg" : a}</td>
-									{/each}
-								</tr>
-								<tr class="bottom">
-									{#each attr as a}
-										<td style:background={colorScale(stats[a])}>{stats[a]}</td>
-									{/each}
-								</tr>
-							</table>
-						</td>
-					</tr>
-				{/each}
-			</table>
-		</div>
-	{/each}
+<div class={era} class:visible>
+	<table class="outer">
+		<tr class="head">
+			<th colspan="3">{year} Toronto Blue Jays</th>
+		</tr>
+		<tr class="head-2">
+			<td>Pos.</td>
+			<td>Player</td>
+			<td>Attributes</td>
+		</tr>
+		{#each data as { name, average, power, walks, speed }, i (name)}
+			{@const stats = { average, power, walks, speed }}
+			{@const faded =
+				highlights.find((d) => d.era === era && d.step === step) &&
+				highlights
+					.filter((d) => d.era === era && d.step === step)
+					.every((d) => d.name !== name)}
+			<tr
+				class={`${name.split(" ")[1].toLowerCase()} row`}
+				class:faded
+				animate:flip={{
+					delay: visible ? 1000 : 500,
+					duration: visible ? 2500 : 0
+				}}
+			>
+				<td>{i + 1}</td>
+				<td class="name">
+					<Handwriting text={name.split(" ")[1]} wonkiness={3} />
+				</td>
+				<td class="contains-table">
+					<table class="inner">
+						<tr class="top">
+							{#each attr as a}
+								<td>{a === "average" ? "avg" : a}</td>
+							{/each}
+						</tr>
+						<tr class="bottom">
+							{#each attr as a}
+								<td style:background={colorScale(stats[a])}>{stats[a]}</td>
+							{/each}
+						</tr>
+					</table>
+				</td>
+			</tr>
+		{/each}
+	</table>
 </div>
 
 <style>
-	.lineups {
-		position: sticky;
-		top: 50%;
-		transform: translate(0, -50%);
-		display: flex;
-		z-index: -1;
-	}
 	.old,
 	.new {
+		position: relative;
 		width: 50%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin: 0 0.5rem;
 		padding: 0.5rem;
 		background: white;
 		border: 4px solid black;

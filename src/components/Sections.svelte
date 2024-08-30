@@ -25,7 +25,7 @@
 	let progressVisible = false;
 
 	const load = (section) => {
-		console.log("load", section);
+		// console.log("load", section);
 		$loadedSections[section] = true;
 	};
 

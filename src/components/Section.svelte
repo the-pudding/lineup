@@ -6,6 +6,7 @@
 	import Cards from "$components/Cards.svelte";
 	import Handwriting from "$components/Handwriting.svelte";
 	import { loadedSections } from "$stores/misc.js";
+	import squiggle from "$svg/squiggle.svg";
 
 	export let i;
 	export let id;
@@ -21,6 +22,7 @@
 <section id={_.kebabCase(title)}>
 	<h2>
 		<Handwriting text={title} wonkiness={5} />
+		{@html squiggle}
 	</h2>
 
 	<Slope
@@ -54,7 +56,9 @@
 		font-size: 3rem;
 		font-family: var(--handwriting);
 		text-transform: uppercase;
-		align-self: start;
+		margin-bottom: 3rem;
+		text-align: center;
+		position: relative;
 	}
 	.text {
 		margin: 3rem 0;
@@ -63,5 +67,12 @@
 		width: 100%;
 		display: flex;
 		justify-content: space-around;
+	}
+
+	:global(svg.squiggle) {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		transform: translate(0, -25%);
 	}
 </style>

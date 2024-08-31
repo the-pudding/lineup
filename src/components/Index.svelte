@@ -2,12 +2,18 @@
 	import Handwriting from "$components/Handwriting.svelte";
 	import Scrollytelling from "$components/Scrollytelling.svelte";
 	import Sections from "$components/Sections.svelte";
+	import AllCards from "$components/AllCards.svelte";
 	import Footer from "$components/Footer.svelte";
 	import _ from "lodash";
 	import copy from "$data/copy.json";
 	import squiggle from "$svg/squiggle.svg";
 
-	console.log(copy.body);
+	let detailsOpen = false;
+	let loadedAllCards = false;
+
+	$: if (detailsOpen && !loadedAllCards) {
+		loadedAllCards = true;
+	}
 </script>
 
 <article>
@@ -23,10 +29,24 @@
 	{#each copy.body as { type, value }}
 		{#if type === "text"}
 			<p>{@html value}</p>
-			<!-- {:else if type === "scroll"}
+		{:else if type === "scroll"}
 			<Scrollytelling steps={value} />
 		{:else if type === "sections"}
 			<Sections sections={value} />
+		{:else if type === "all-cards"}
+			<details bind:open={detailsOpen}>
+				<summary>{@html value[0].value}</summary>
+				<div class="click">
+					<Handwriting
+						text={`Click on a card to flip it over and see the back!`}
+						wonkiness={0}
+						small={true}
+					/>
+				</div>
+				{#if loadedAllCards}
+					<AllCards />
+				{/if}
+			</details>
 		{:else}
 			<section id={type}>
 				<h2>
@@ -35,7 +55,7 @@
 				{#each value as { value }}
 					<p>{@html value}</p>
 				{/each}
-			</section> -->
+			</section>
 		{/if}
 	{/each}
 
@@ -68,9 +88,13 @@
 		margin-bottom: 5rem;
 		text-align: center;
 	}
-	p {
+	p,
+	summary {
 		max-width: 630px;
 		margin: 1rem auto;
+	}
+	summary:hover {
+		cursor: pointer;
 	}
 	section {
 		max-width: 630px;
@@ -78,6 +102,12 @@
 	}
 	#credits {
 		margin-top: 8rem;
+	}
+	.click {
+		display: flex;
+		justify-content: center;
+		margin: 2rem 0;
+		font-size: 1.3rem;
 	}
 	:global(#credits a) {
 		white-space: nowrap;

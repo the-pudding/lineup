@@ -9,6 +9,7 @@
 	export let info;
 	export let zIndex;
 	export let maxZIndex;
+	export let withWidth = false;
 
 	let cardEl;
 	let cardWidth;
@@ -18,7 +19,6 @@
 	const cardHeight = 250;
 	const cardHeightEnlarged = 600;
 	const angles = [-2, 5, -10];
-	const ys = [0, 0, 0];
 
 	const onClick = () => {
 		dx = $viewport.width / 2 - cardEl.getBoundingClientRect().left - cardWidth;
@@ -42,7 +42,7 @@
 	$: imgSrc = `assets/cards/${id}.png`;
 </script>
 
-{#if i === 0}
+{#if withWidth || i === 0}
 	<div class="placeholder" style:height={`${cardHeight}px`} />
 {/if}
 
@@ -51,9 +51,11 @@
 	class:flipped
 	class:disabled
 	style:z-index={flipped ? 1000 : zIndex}
-	style="--y-offset: {ys[i]}px; --angle: {angles[
-		i
-	]}deg; --card-height: {cardHeight}px; --card-height-enlarged: {cardHeightEnlarged}px; --dx: {dx}px; --dy: {dy}px; --flip-speed: 0.5s"
+	style="--angle: {withWidth
+		? 0
+		: angles[
+				i
+			]}deg; --card-height: {cardHeight}px; --card-height-enlarged: {cardHeightEnlarged}px; --dx: {dx}px; --dy: {dy}px; --flip-speed: 0.5s"
 	on:click={onClick}
 	on:keydown={onKeyDown}
 	role="button"
@@ -78,7 +80,7 @@
 		top: 0;
 		border-radius: 0.25rem;
 		transform-origin: center center;
-		transform: translateY(var(--y-offset)) rotate(var(--angle));
+		transform: rotate(var(--angle));
 		transition: transform var(--flip-speed);
 	}
 	.card.flipped {

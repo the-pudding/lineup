@@ -70,7 +70,7 @@
 		height: 100%;
 	}
 	line {
-		stroke: var(--color-gray-800);
+		stroke: black;
 		stroke-linecap: round;
 	}
 	:global(#annotations g) {

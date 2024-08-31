@@ -69,7 +69,7 @@
 		justify-content: space-around;
 	}
 
-	:global(svg.squiggle) {
+	:global(h2 svg.squiggle) {
 		position: absolute;
 		top: 100%;
 		left: 0;

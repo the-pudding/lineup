@@ -101,7 +101,7 @@
 		margin: auto;
 	}
 	.spacer {
-		height: 75vh;
+		height: 35vh;
 	}
 	.step {
 		margin: 80vh auto;

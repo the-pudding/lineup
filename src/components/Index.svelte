@@ -5,6 +5,7 @@
 	import Footer from "$components/Footer.svelte";
 	import _ from "lodash";
 	import copy from "$data/copy.json";
+	import squiggle from "$svg/squiggle.svg";
 </script>
 
 <article>
@@ -13,7 +14,8 @@
 	<h1>
 		<Handwriting text={copy.hed} />
 	</h1>
-
+	<div class="subhed">{@html copy.subhed}</div>
+	<div class="squiggle-wrapper">{@html squiggle}</div>
 	<div class="byline">{@html copy.byline}</div>
 
 	{#each copy.body as { type, value }}
@@ -51,8 +53,19 @@
 	h1 {
 		text-transform: uppercase;
 		font-size: 5rem;
-		max-width: 750px;
-		margin: 3rem auto;
+		display: flex;
+		justify-content: center;
+		margin-top: 3rem;
+	}
+	.subhed {
+		text-align: center;
+		font-size: 1.5rem;
+		margin: 0;
+	}
+	.squiggle-wrapper {
+		position: relative;
+		height: 36px;
+		margin: 2rem 0;
 	}
 	h2 {
 		font-size: 3rem;

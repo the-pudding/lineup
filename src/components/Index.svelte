@@ -6,6 +6,8 @@
 	import _ from "lodash";
 	import copy from "$data/copy.json";
 	import squiggle from "$svg/squiggle.svg";
+
+	console.log(copy.body);
 </script>
 
 <article>
@@ -21,28 +23,19 @@
 	{#each copy.body as { type, value }}
 		{#if type === "text"}
 			<p>{@html value}</p>
-		{:else if type === "scroll"}
+			<!-- {:else if type === "scroll"}
 			<Scrollytelling steps={value} />
 		{:else if type === "sections"}
 			<Sections sections={value} />
-		{:else if type === "credits"}
-			<section id="credits">
+		{:else}
+			<section id={type}>
 				<h2>
-					<Handwriting text="Credits" wonkiness={8} />
+					<Handwriting text={type} wonkiness={8} />
 				</h2>
 				{#each value as { value }}
 					<p>{@html value}</p>
 				{/each}
-			</section>
-		{:else if type === "methods"}
-			<section id="methods">
-				<h2>
-					<Handwriting text="Methodology" wonkiness={8} />
-				</h2>
-				{#each value as { value }}
-					<p>{@html value}</p>
-				{/each}
-			</section>
+			</section> -->
 		{/if}
 	{/each}
 

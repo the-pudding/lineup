@@ -39,20 +39,29 @@
 		"gray-1000": {
 			"value": "rgb(25, 25, 25)"
 		},
-		"purple": {
-			"value": "#a239ca"
+		"power": {
+			"value": "#c5283d"
 		},
-		"blue": {
-			"value": "#4717f6"
+		"walks": {
+			"value": "#255f85"
 		},
-		"green": {
-			"value": "#34a29e"
+		"average": {
+			"value": "#e9724c"
 		},
-		"red": {
-			"value": "#ff533d"
+		"speed": {
+			"value": "#ffc857"
 		},
-		"yellow": {
-			"value": "#e5e338"
+		"tan": {
+			"value": "#f6f1e8"
+		},
+		"green-bright": {
+			"value": "#c7f79c"
+		},
+		"green-medium": {
+			"value": "#77a84c"
+		},
+		"green-dark": {
+			"value": "#5b634b"
 		}
 	}
 }

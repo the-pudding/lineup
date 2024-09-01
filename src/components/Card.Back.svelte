@@ -2,8 +2,10 @@
 	import stats from "$data/back-stats.csv";
 	import _ from "lodash";
 	import csvDownload from "$utils/csvDownload.js";
+	import variables from "$data/variables.json";
 	import { scaleLinear } from "d3-scale";
 	import { interpolateRgb } from "d3-interpolate";
+	import changeOpacity from "$utils/changeOpacity.js";
 
 	export let id;
 	export let info;
@@ -25,8 +27,8 @@
 		document.body.removeChild(link);
 	};
 
-	const startColor = "rgba(255,0,0,0.4)";
-	const endColor = "rgba(0,255,0,0.4)";
+	const startColor = changeOpacity(variables.color["green-dark"], 0.5);
+	const endColor = variables.color["green-bright"];
 	const colorScale = scaleLinear()
 		.domain([0, 5])
 		.interpolate(interpolateRgb)

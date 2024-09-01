@@ -4,6 +4,8 @@
 	import { scaleLinear } from "d3-scale";
 	import { interpolateRgb } from "d3-interpolate";
 	import { flip } from "svelte/animate";
+	import variables from "$data/variables.json";
+	import changeOpacity from "$utils/changeOpacity.js";
 
 	export let era;
 	export let year;
@@ -13,8 +15,8 @@
 	export let step;
 
 	const attr = ["average", "power", "walks", "speed"];
-	const startColor = "rgba(255,0,0,0.4)";
-	const endColor = "rgba(0,255,0,0.4)";
+	const startColor = changeOpacity(variables.color["green-dark"], 0.5);
+	const endColor = variables.color["green-bright"];
 	const colorScale = scaleLinear()
 		.domain([0, 5])
 		.interpolate(interpolateRgb)
@@ -87,7 +89,7 @@
 		border: 2px solid dodgerblue;
 	}
 	.new .outer {
-		border: 2px solid darkblue;
+		border: 2px solid rgb(11, 44, 77);
 	}
 	.visible {
 		opacity: 1;
@@ -147,8 +149,10 @@
 	}
 	.bottom {
 		border-bottom: 0px;
-		font-family: var(--handwriting);
-		font-size: 1rem;
+		font-family: var(--sans);
+	}
+	.bottom td {
+		padding: 2px 0;
 	}
 	.top,
 	.bottom {

@@ -18,11 +18,22 @@
 	--z-top: 100;
 	--z-overlay: 1000;
 
+	/* colors */
+	/* --color-power: #c5283d;
+	--color-walks: #255f85;
+	--color-average: #e9724c;
+	--color-speed: #ffc857;
+
+	--color-tan: #f6f1e8;
+	--color-green-bright: #90e048;
+	--color-green-medium: #00cc00;
+	--color-green-dark: #5b634b; */
+
 	/* presets (used in reset.css) */
 	--border-radius: 2px;
 	--font-body: var(--sans);
 	--font-form: var(--sans);
-	--color-bg: #f6f1e8;
+	--color-bg: var(--color-tan);
 	--color-fg: var(--color-black);
 	--color-primary: var(--color-black);
 	--color-link: var(--color-black);
@@ -99,5 +110,6 @@ a {
 	font-weight: bold;
 }
 a:hover {
-	color: var(--color-gray-600);
+	color: var(--color-green-medium);
+	text-decoration: 2px underline var(--color-green-medium);
 }

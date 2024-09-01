@@ -14,6 +14,7 @@
 	$: if (detailsOpen && !loadedAllCards) {
 		loadedAllCards = true;
 	}
+	$: console.log(copy.body);
 </script>
 
 <article>

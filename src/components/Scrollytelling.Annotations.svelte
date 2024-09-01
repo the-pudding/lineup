@@ -7,7 +7,7 @@
 	export let allNames;
 
 	const arrowLength = 25;
-	const strokeWidth = 5;
+	const strokeWidth = 4;
 	let lineCoords = [];
 
 	const getCoords = (name) => {

@@ -36,13 +36,16 @@
 		opacity: 1;
 	}
 	.block {
-		background: rgb(91, 99, 75, 0.4);
+		background: var(--color-green-dark);
+		opacity: 0.4;
 		height: 20px;
 		width: 50px;
 		margin: 2px 0;
-		transition: background-color calc(var(--1s) * 0.2);
+		transition: none;
 	}
 	.active {
-		background: #90e048;
+		opacity: 1;
+		background: var(--color-green-bright);
+		border: 2px solid black;
 	}
 </style>

@@ -15,7 +15,7 @@
 	const xKey = "era";
 	const xDomain = ["1970-2009", "2010-present"];
 	const attributes = ["speed", "average", "power", "walks"];
-	const colors = ["#FFC857", "#E9724C", "#C5283D", "#255F85"];
+	const colors = attributes.map((d) => `var(--color-${d})`);
 
 	const dataCleaned = data.map((d) => {
 		const obj = { [xKey]: d[xKey] };

@@ -1,4 +1,5 @@
 <script>
+	import copy from "$data/copy.json";
 	import Balls from "$components/Slope.Balls.svelte";
 	import AxisX from "$components/layercake/AxisX.svg.svelte";
 	import AxisY from "$components/layercake/AxisY.svg.svelte";
@@ -24,13 +25,9 @@
 		});
 		return obj;
 	});
-
-	const old = dataCleaned.find((d) => d.era === "1970-2009");
-	const neww = dataCleaned.find((d) => d.era === "2010-present");
-	const oldAvg =
-		(old["speed"] + old["average"] + old["power"] + old["walks"]) / 4;
-	const newAvg =
-		(neww["speed"] + neww["average"] + neww["power"] + neww["walks"]) / 4;
+	const attributesExplainer = copy.body
+		.find((d) => d.type === "methods")
+		.value.find((d) => d.type === "ul").value;
 
 	$: loaded = $loadedSections[sectionI];
 </script>
@@ -64,25 +61,10 @@
 <div class="methods">
 	<details>
 		<summary>Where do these attributes come from?</summary>
-
 		<ul>
-			<li>
-				<strong>Hitting for Average:</strong> Batting average (a classic stat showing
-				the player’s ratio of hits to at-bats)
-			</li>
-			<li>
-				<strong>Hitting for Power:</strong> Isolated power (a measure that tracks
-				a player’s extra-base hits per AB)
-			</li>
-			<li>
-				<strong>Drawing Walks:</strong> Walk rate (the percentage of the player’s
-				plate appearances that end in a walk)
-			</li>
-			<li>
-				<strong>Running Speed:</strong> Speed score (a stat created by Bill James,
-				the godfather of Sabermetrics, which estimates a player’s speed from various
-				different other statistics)
-			</li>
+			{#each attributesExplainer as { value }}
+				<li>{@html value}</li>
+			{/each}
 		</ul>
 		<div>See <a href="#methods">methodology</a> for more.</div>
 	</details>
@@ -101,7 +83,6 @@
 	summary:hover {
 		cursor: pointer;
 	}
-
 	.chart-container {
 		font-family: var(--mono);
 		width: 100%;

@@ -61,13 +61,54 @@
 	</LayerCake>
 </div>
 
+<div class="methods">
+	<details>
+		<summary>Where do these attributes come from?</summary>
+
+		<ul>
+			<li>
+				<strong>Hitting for Average:</strong> Batting average (a classic stat showing
+				the player’s ratio of hits to at-bats)
+			</li>
+			<li>
+				<strong>Hitting for Power:</strong> Isolated power (a measure that tracks
+				a player’s extra-base hits per AB)
+			</li>
+			<li>
+				<strong>Drawing Walks:</strong> Walk rate (the percentage of the player’s
+				plate appearances that end in a walk)
+			</li>
+			<li>
+				<strong>Running Speed:</strong> Speed score (a stat created by Bill James,
+				the godfather of Sabermetrics, which estimates a player’s speed from various
+				different other statistics)
+			</li>
+		</ul>
+		<div>See <a href="#methods">methodology</a> for more.</div>
+	</details>
+</div>
+
 <style>
+	.methods {
+		margin-top: 2rem;
+		width: 100%;
+		max-width: 500px;
+		font-size: 0.9rem;
+	}
+	ul {
+		margin: 1.5rem 0;
+	}
+	summary:hover {
+		cursor: pointer;
+	}
+
 	.chart-container {
 		font-family: var(--mono);
 		width: 100%;
 		max-width: 400px;
 		height: 300px;
-		margin: 2rem 0;
+		margin-top: 2rem;
+		margin-bottom: 3rem;
 	}
 	.chart-title {
 		font-weight: bold;

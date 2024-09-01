@@ -61,7 +61,8 @@
 		position: relative;
 	}
 	.text {
-		margin: 3rem 0;
+		margin-top: 1.5rem;
+		margin-bottom: 3rem;
 	}
 	.cards {
 		width: 100%;

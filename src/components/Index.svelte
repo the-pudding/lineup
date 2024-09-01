@@ -7,6 +7,7 @@
 	import _ from "lodash";
 	import copy from "$data/copy.json";
 	import squiggle from "$svg/squiggle.svg";
+	import { InfinityIcon } from "lucide-svelte";
 
 	let detailsOpen = false;
 	let loadedAllCards = false;
@@ -14,7 +15,6 @@
 	$: if (detailsOpen && !loadedAllCards) {
 		loadedAllCards = true;
 	}
-	$: console.log(copy.body);
 </script>
 
 <article>
@@ -53,8 +53,16 @@
 				<h2>
 					<Handwriting text={type} wonkiness={8} />
 				</h2>
-				{#each value as { value }}
-					<p>{@html value}</p>
+				{#each value as { type, value }}
+					{#if type === "text"}
+						<p>{@html value}</p>
+					{:else if type === "ul"}
+						<ul>
+							{#each value as { value }}
+								<li>{@html value}</li>
+							{/each}
+						</ul>
+					{/if}
 				{/each}
 			</section>
 		{/if}
@@ -109,6 +117,9 @@
 		justify-content: center;
 		margin: 2rem 0;
 		font-size: 1.3rem;
+	}
+	ul {
+		padding-left: 3rem;
 	}
 	:global(#credits a) {
 		white-space: nowrap;

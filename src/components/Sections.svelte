@@ -42,7 +42,7 @@
 	});
 </script>
 
-<Progress visible={progressVisible} />
+<Progress visible={progressVisible} {sections} />
 
 <div
 	class="sections"

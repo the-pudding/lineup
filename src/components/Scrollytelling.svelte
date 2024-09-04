@@ -106,7 +106,7 @@
 	.step {
 		margin: 80vh auto;
 		border: 3px solid black;
-		background: var(--color-bg);
+		background: white;
 		max-width: 630px;
 		text-align: center;
 		z-index: 1000;

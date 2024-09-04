@@ -3,24 +3,37 @@
 	import _ from "lodash";
 
 	export let visible;
+	export let sections;
 
-	const activeSections = {
-		0: [0],
-		1: [1],
-		2: [2],
-		3: [3],
-		4: [4, 5, 6],
-		5: [7, 8]
+	const sectionsPlus = sections.map((d, i) => ({
+		...d,
+		n: d.id === "5-7" ? 3 : d.id === "8-9" ? 2 : 1
+	}));
+
+	const onClick = (i) => {
+		const sectionEl = document.getElementById(
+			_.kebabCase(sectionsPlus[i].title)
+		);
+		sectionEl.scrollIntoView({ behavior: "smooth" });
+
+		setTimeout(() => {
+			$currentSection = i;
+		}, 1000);
 	};
 </script>
 
 <div class="progress" class:visible>
-	{#each _.range(9) as i}
-		{@const active =
-			$currentSection !== undefined
-				? activeSections[$currentSection].includes(i)
-				: false}
-		<div class="block" class:active />
+	{#each sectionsPlus as section, i}
+		<button
+			class="blocks"
+			class:active={$currentSection === i}
+			on:click={() => onClick(i)}
+		>
+			{#each _.range(section.n) as j}
+				{@const blockI = section.id === "8-9" ? i + j + 3 : i + j + 1}
+				<div class="block">{blockI}</div>
+			{/each}
+		</button>
 	{/each}
 </div>
 
@@ -36,16 +49,38 @@
 		opacity: 1;
 	}
 	.block {
-		background: var(--color-green-dark);
-		opacity: 0.4;
+		display: block;
+		background: #c5c9b7;
+		font-family: var(--mono);
+		margin: 2px 0;
 		height: 20px;
 		width: 50px;
-		margin: 2px 0;
 		transition: none;
+	}
+	.blocks {
+		margin: -2px 0;
+	}
+	.blocks:hover .block {
+		background: #888f6f;
+	}
+	.blocks:focus {
+		outline-offset: 0;
 	}
 	.active {
 		opacity: 1;
 		background: var(--color-green-bright);
-		border: 2px solid black;
+		outline: 2px solid black;
+		padding: 0 2px;
+		transform: translate(-2px, 0);
+	}
+	.active .block {
+		opacity: 0.4;
+	}
+	button {
+		display: block;
+		padding: 0;
+		margin: 0;
+		background: none;
+		border-radius: 0;
 	}
 </style>

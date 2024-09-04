@@ -3,7 +3,7 @@
 	import Card from "$components/Card.svelte";
 	import _ from "lodash";
 	import { selectedCard } from "$stores/misc.js";
-	import shuffleIcon from "$svg/shuffle.svg";
+	import shuffleIcon from "$svg/shuffle-handwritten.svg";
 
 	export let data;
 	export let id;
@@ -19,6 +19,8 @@
 		});
 	});
 
+	const allIds = data.map((d) => _.kebabCase(d.name));
+
 	const shuffle = (era) => {
 		const elements = dataCleaned[era.id];
 		elements.forEach((el) => {
@@ -30,13 +32,15 @@
 		});
 		dataCleaned = dataCleaned;
 	};
+
+	$: fade = $selectedCard !== undefined;
 </script>
 
 <div class="cards-wrapper">
-	<h3>
+	<h3 class:fade>
 		<Handwriting text={`Players that exemplify batting #${id}`} wonkiness={3} />
 	</h3>
-	<div class="click">
+	<div class="click" class:fade>
 		<Handwriting
 			text={`Click on a card to flip it over and see the back!`}
 			wonkiness={0}
@@ -53,17 +57,19 @@
 						<Card
 							{i}
 							id={_.kebabCase(card.name)}
+							{allIds}
 							zIndex={card.zIndex}
 							{maxZIndex}
 							info={{ ...card }}
 						/>
 					{/each}
 				</div>
-				<div class="label">{era.name}</div>
-				<div class="sublabel">({era.id})</div>
+				<div class="label" class:fade>{era.name}</div>
+				<div class="sublabel" class:fade>({era.id})</div>
 
 				<button
 					class="shuffle"
+					class:fade
 					on:click={() => shuffle(era)}
 					disabled={$selectedCard}
 				>
@@ -80,6 +86,12 @@
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
+	}
+	.cards-wrapper * {
+		transition: opacity calc(var(--1s) * 0.5);
+	}
+	.fade {
+		opacity: 0.1;
 	}
 	h3 {
 		font-family: var(--handwriting);

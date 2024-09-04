@@ -42,7 +42,6 @@
 		power: d.power,
 		speed: d.speed
 	}));
-
 	$: if (seasons.length === 0 || !seasons) console.log({ id, seasons });
 </script>
 

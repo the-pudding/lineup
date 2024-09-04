@@ -1,5 +1,5 @@
 <script>
-	import { currentSection } from "$stores/misc.js";
+	import { currentSection, selectedCard } from "$stores/misc.js";
 	import _ from "lodash";
 
 	export let visible;
@@ -20,9 +20,11 @@
 			$currentSection = i;
 		}, 1000);
 	};
+
+	$: fade = $selectedCard !== undefined;
 </script>
 
-<div class="progress" class:visible>
+<div class="progress" class:visible class:fade>
 	{#each sectionsPlus as section, i}
 		<button
 			class="blocks"
@@ -47,6 +49,9 @@
 	}
 	.progress.visible {
 		opacity: 1;
+	}
+	.progress.fade {
+		opacity: 0.1;
 	}
 	.block {
 		display: block;

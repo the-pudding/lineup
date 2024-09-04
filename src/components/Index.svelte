@@ -7,7 +7,6 @@
 	import _ from "lodash";
 	import copy from "$data/copy.json";
 	import squiggle from "$svg/squiggle.svg";
-	import { InfinityIcon } from "lucide-svelte";
 
 	let detailsOpen = false;
 	let loadedAllCards = false;

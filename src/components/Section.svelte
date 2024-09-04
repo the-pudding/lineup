@@ -5,7 +5,7 @@
 	import Slope from "$components/Slope.svelte";
 	import Cards from "$components/Cards.svelte";
 	import Handwriting from "$components/Handwriting.svelte";
-	import { loadedSections } from "$stores/misc.js";
+	import { loadedSections, selectedCard } from "$stores/misc.js";
 	import squiggle from "$svg/squiggle.svg";
 
 	export let i;
@@ -17,28 +17,31 @@
 	const cardsData = cards.filter((d) => d.slot === id);
 
 	$: loaded = $loadedSections[i];
+	$: fade = $selectedCard !== undefined;
 </script>
 
 <section id={_.kebabCase(title)}>
-	<h2>
-		<Handwriting text={title} wonkiness={5} />
-		{@html squiggle}
-	</h2>
+	<div class="non-cards" class:fade>
+		<h2>
+			<Handwriting text={title} wonkiness={5} />
+			{@html squiggle}
+		</h2>
 
-	<Slope
-		sectionI={i}
-		{id}
-		data={slopeData}
-		title={`Change in average attributes of batter #${id}`}
-	/>
+		<Slope
+			sectionI={i}
+			{id}
+			data={slopeData}
+			title={`Change in average attributes of batter #${id}`}
+		/>
 
-	{#if text}
-		<div class="text">
-			{#each text as { value }}
-				<p>{@html value}</p>
-			{/each}
-		</div>
-	{/if}
+		{#if text}
+			<div class="text">
+				{#each text as { value }}
+					<p>{@html value}</p>
+				{/each}
+			</div>
+		{/if}
+	</div>
 
 	{#if loaded}
 		<Cards data={cardsData} {id} />
@@ -68,6 +71,16 @@
 		width: 100%;
 		display: flex;
 		justify-content: space-around;
+	}
+	.non-cards {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		opacity: 1;
+		transition: opacity 0.5s;
+	}
+	.non-cards.fade {
+		opacity: 0.1;
 	}
 
 	:global(h2 svg.squiggle) {

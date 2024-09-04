@@ -62,5 +62,10 @@
 		position: relative;
 		max-width: 630px;
 		margin: 0 auto;
+		opacity: 1;
+		transition: opacity 0.5s;
+	}
+	.fade {
+		opacity: 0.1;
 	}
 </style>

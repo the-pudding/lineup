@@ -6,7 +6,7 @@
 	import Footer from "$components/Footer.svelte";
 	import _ from "lodash";
 	import copy from "$data/copy.json";
-	import squiggle from "$svg/squiggle.svg";
+	import squiggle from "$svg/squiggle2.svg";
 
 	let detailsOpen = false;
 	let loadedAllCards = false;

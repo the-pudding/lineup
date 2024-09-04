@@ -6,7 +6,7 @@
 	import Cards from "$components/Cards.svelte";
 	import Handwriting from "$components/Handwriting.svelte";
 	import { loadedSections, selectedCard } from "$stores/misc.js";
-	import squiggle from "$svg/squiggle.svg";
+	import squiggle from "$svg/squiggle2.svg";
 
 	export let i;
 	export let id;
@@ -56,6 +56,9 @@
 		align-items: center;
 	}
 	h2 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		font-size: 3rem;
 		font-family: var(--handwriting);
 		text-transform: uppercase;

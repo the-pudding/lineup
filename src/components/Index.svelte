@@ -126,7 +126,7 @@
 	img {
 		max-height: 25rem;
 		width: auto;
-		margin: auto;
+		margin: 2rem auto;
 	}
 	:global(#credits a) {
 		white-space: nowrap;

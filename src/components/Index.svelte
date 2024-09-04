@@ -17,7 +17,7 @@
 </script>
 
 <article>
-	<img src="assets/hero.png" style="height: 25rem; margin: auto" />
+	<img src="assets/hero-wip.png" />
 
 	<h1>
 		<Handwriting text={copy.hed} />
@@ -71,6 +71,9 @@
 </article>
 
 <style>
+	article {
+		padding: 0 1rem;
+	}
 	h1 {
 		text-transform: uppercase;
 		font-size: 5rem;
@@ -119,6 +122,11 @@
 	}
 	ul {
 		padding-left: 3rem;
+	}
+	img {
+		max-height: 25rem;
+		width: auto;
+		margin: auto;
 	}
 	:global(#credits a) {
 		white-space: nowrap;

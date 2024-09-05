@@ -38,7 +38,10 @@
 
 <div class="cards-wrapper">
 	<h3 class:fade>
-		<Handwriting text={`Players that exemplify batting #${id}`} wonkiness={3} />
+		<Handwriting
+			text={`Iconic ${id === "1" ? `leadoff (#1)` : id === "4" ? `cleanup (#4)` : `#${id}`} hitters`}
+			wonkiness={3}
+		/>
 	</h3>
 	<div class="click" class:fade>
 		<Handwriting

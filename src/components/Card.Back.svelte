@@ -218,6 +218,7 @@
 	}
 	img {
 		filter: grayscale(100%);
+		border: 2px solid var(--card-fg);
 	}
 	table {
 		font-family: var(--mono);

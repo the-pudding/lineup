@@ -109,7 +109,7 @@
 						<td
 							class="average"
 							style:background={i === 0 ? "" : colorScale(average.toFixed(1))}
-							>{i === 0 ? "" : average.toFixed(1)}</td
+							>{i === 0 ? "AVG" : average.toFixed(1)}</td
 						>
 					{/each}
 				</tr>

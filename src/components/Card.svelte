@@ -16,6 +16,7 @@
 	export let maxZIndex;
 	export let withWidth = false;
 
+
 	let cardEl;
 	let cardWidth;
 	let dx;

@@ -5,16 +5,20 @@
 	import variables from "$data/variables.json";
 	import { scaleLinear } from "d3-scale";
 	import { interpolateRgb } from "d3-interpolate";
+	import downloadIcon from "$svg/download.svg";
 	import changeOpacity from "$utils/changeOpacity.js";
 
 	export let id;
 	export let info;
 	export let flipped;
 
-	const { name, height, weight, throws, bats, hometown, birthday, blurb } =
+	const { era, name, height, weight, throws, bats, hometown, birthday, blurb } =
 		info;
 	const columns = ["season", "walks", "average", "power", "speed"];
-	const style = { bg: "#B5B69E", fg: "#44455D", main: "#eee9e9" }; // main: #C9BB35
+	const style =
+		era === "1970-2009"
+			? { edge: "#B5B69E", fg: "#44455D", name: "#eee9e9", bg: "#eee9e9" }
+			: { edge: "#fdf4dc", fg: "#08362d", name: "#fdf4dc", bg: "#eee9e9" };
 
 	const download = (e) => {
 		e.stopPropagation();
@@ -48,7 +52,7 @@
 <div
 	class="back"
 	class:visible={flipped}
-	style={`--card-bg: ${style.bg}; --card-fg: ${style.fg}; --card-main: ${style.main}`}
+	style={`--card-edge: ${style.edge}; --card-name: ${style.name}; --card-fg: ${style.fg}; --card-bg: ${style.bg}`}
 >
 	<div class="name">
 		{name}
@@ -57,7 +61,7 @@
 	<div class="main">
 		<div class="info">
 			<span>Height: {height}</span>
-			<span>Weight: {weight}lbs</span>
+			<span>Weight: {weight} lbs</span>
 			<span>Bats: {bats}</span>
 			<span>Throws: {throws}</span>
 			<span>Hometown: {hometown}</span>
@@ -112,14 +116,17 @@
 			</table>
 		</div>
 
-		<button class="download" on:click={download}>Download data</button>
+		<button class="download" on:click={download}>
+			Download data
+			<span>{@html downloadIcon}</span>
+		</button>
 	</div>
 </div>
 
 <style>
 	.back {
 		border-radius: 0.25rem;
-		background: var(--card-bg);
+		background: var(--card-edge);
 		padding: 0.75rem;
 		font-family: var(--sans);
 		display: flex;
@@ -148,14 +155,14 @@
 		font-weight: bold;
 		text-transform: uppercase;
 		text-align: center;
-		color: var(--card-bg);
+		color: var(--card-name);
 		background: var(--card-fg);
 		width: 100%;
 		height: 40px;
 	}
 	.main {
 		height: calc(100% - 40px);
-		background: var(--card-main);
+		background: var(--card-bg);
 		color: var(--card-fg);
 		border: 2px solid var(--card-fg);
 		padding: 10px;
@@ -183,7 +190,20 @@
 		margin: 1rem 0;
 	}
 	.download {
+		display: flex;
+		align-items: center;
 		font-size: 0.75rem;
+		align-self: start;
+		background: none;
+		color: var(--card-fg);
+	}
+	.download span {
+		height: 18px;
+		display: flex;
+		margin-left: 4px;
+	}
+	.download:hover {
+		color: var(--color-green-medium);
 	}
 	figure {
 		height: 135px;
@@ -193,7 +213,7 @@
 	figcaption {
 		margin-top: 2px;
 		font-size: 10px;
-		color: var(--color-gray-600);
+		color: var(--color-gray-700);
 		text-align: center;
 	}
 	img {

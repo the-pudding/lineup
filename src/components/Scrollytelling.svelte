@@ -1,5 +1,4 @@
 <script>
-	import Annotations from "$components/Scrollytelling.Annotations.svelte";
 	import Lineup from "$components/Scrollytelling.Lineup.svelte";
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 	import toronto from "$data/toronto.csv";
@@ -62,9 +61,6 @@
 			}
 		);
 	});
-	const allNames = _.uniq(
-		toronto.map((d) => d.name.split(" ")[1].toLowerCase())
-	);
 </script>
 
 <div class="scrolly">
@@ -80,8 +76,6 @@
 					: _.orderBy(toronto, `${era}Slot`)}
 			<Lineup {era} {year} {visible} {data} {highlights} step={value} />
 		{/each}
-
-		<Annotations step={value} {highlights} {allNames} />
 	</div>
 
 	<Scrolly bind:value>

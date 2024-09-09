@@ -151,27 +151,28 @@
 		margin-bottom: 2px;
 	}
 	.name {
-		font-size: 1.8rem;
+		font-size: 1.5rem;
 		font-weight: bold;
 		text-transform: uppercase;
 		text-align: center;
 		color: var(--card-name);
 		background: var(--card-fg);
 		width: 100%;
-		height: 40px;
+		height: 32px;
 	}
 	.main {
 		height: calc(100% - 40px);
 		background: var(--card-bg);
 		color: var(--card-fg);
 		border: 2px solid var(--card-fg);
-		padding: 10px;
+		padding: 5px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		overflow: scroll;
 	}
 	.info {
-		font-size: 0.75rem;
+		font-size: 0.68rem;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -185,9 +186,12 @@
 		margin: 1rem 0;
 		gap: 1rem;
 	}
+	.fact-text {
+		font-size: 0.8rem;
+	}
 	.table {
-		overflow: scroll;
 		margin: 1rem 0;
+		font-size: 0.9rem;
 	}
 	.download {
 		display: flex;

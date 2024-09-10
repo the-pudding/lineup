@@ -60,7 +60,7 @@
 		}
 	};
 
-	$: if (!active && flipped) flipped = false;
+	$: if ((!active || $currentSection !== sectionI) && flipped) flipped = false;
 	$: name = info?.name;
 	$: flipped = false;
 	$: trapped = active && flipped;

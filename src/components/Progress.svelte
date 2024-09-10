@@ -1,5 +1,5 @@
 <script>
-	import { currentSection, selectedCard } from "$stores/misc.js";
+	import { currentSection } from "$stores/misc.js";
 	import _ from "lodash";
 
 	export let visible;
@@ -11,9 +11,7 @@
 	}));
 
 	const onClick = (i) => {
-		const sectionEl = document.getElementById(
-			_.kebabCase(sectionsPlus[i].title)
-		);
+		const sectionEl = document.getElementById(`batting-${sectionsPlus[i].id}`);
 		sectionEl.scrollIntoView({ behavior: "smooth" });
 
 		setTimeout(() => {
@@ -21,12 +19,29 @@
 		}, 1000);
 	};
 
-	$: fade = $selectedCard !== undefined;
+	const onKeyDown = (e) => {
+		if (e.keyCode === 49) {
+			onClick(0);
+		} else if (e.keyCode === 50) {
+			onClick(1);
+		} else if (e.keyCode === 51) {
+			onClick(2);
+		} else if (e.keyCode === 52) {
+			onClick(3);
+		} else if (e.keyCode === 53 || e.keyCode === 54 || e.keyCode === 55) {
+			onClick(4);
+		} else if (e.keyCode === 56 || e.keyCode === 57) {
+			onClick(5);
+		}
+	};
 </script>
 
-<div class="progress" class:visible class:fade>
+<svelte:window on:keydown={onKeyDown} />
+
+<div class="progress" class:visible>
 	{#each sectionsPlus as section, i}
 		<button
+			tabindex="-1"
 			class="blocks"
 			class:active={$currentSection === i}
 			on:click={() => onClick(i)}
@@ -49,9 +64,6 @@
 	}
 	.progress.visible {
 		opacity: 1;
-	}
-	.progress.fade {
-		opacity: 0.1;
 	}
 	.block {
 		display: block;

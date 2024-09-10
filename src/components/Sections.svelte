@@ -4,11 +4,7 @@
 	import Section from "$components/Section.svelte";
 	import inView from "$actions/inView.js";
 	import viewport from "$stores/viewport.js";
-	import {
-		selectedCard,
-		currentSection,
-		loadedSections
-	} from "$stores/misc.js";
+	import { currentSection, loadedSections } from "$stores/misc.js";
 	import _ from "lodash";
 	import { onMount } from "svelte";
 
@@ -21,8 +17,6 @@
 	};
 
 	const sectionChange = () => {
-		$selectedCard = undefined;
-
 		if (!$loadedSections[$currentSection]) {
 			load($currentSection);
 		}

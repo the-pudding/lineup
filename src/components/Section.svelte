@@ -5,7 +5,7 @@
 	import Slope from "$components/Slope.svelte";
 	import Cards from "$components/Cards.svelte";
 	import Handwriting from "$components/Handwriting.svelte";
-	import { loadedSections, selectedCard } from "$stores/misc.js";
+	import { loadedSections } from "$stores/misc.js";
 	import squiggle from "$svg/squiggle2.svg";
 
 	export let i;
@@ -17,11 +17,10 @@
 	const cardsData = cards.filter((d) => d.slot === id);
 
 	$: loaded = $loadedSections[i];
-	$: fade = $selectedCard !== undefined;
 </script>
 
 <section id={`batting-${id}`}>
-	<div class="non-cards" class:fade>
+	<div class="non-cards">
 		<h2>
 			<Handwriting text={title} wonkiness={5} />
 			{@html squiggle}
@@ -79,13 +78,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		opacity: 1;
-		transition: opacity 0.5s;
 	}
-	.non-cards.fade {
-		opacity: 0.1;
-	}
-
 	:global(h2 svg.squiggle) {
 		position: absolute;
 		top: 100%;

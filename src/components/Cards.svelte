@@ -2,7 +2,7 @@
 	import Handwriting from "$components/Handwriting.svelte";
 	import Card from "$components/Card.svelte";
 	import _ from "lodash";
-	import { selectedCard, currentSection } from "$stores/misc.js";
+	import { currentSection } from "$stores/misc.js";
 	import { register } from "swiper/element/bundle";
 	import mq from "$stores/mq.js";
 	import { onMount } from "svelte";
@@ -44,7 +44,6 @@
 
 	register();
 
-	$: fade = $selectedCard !== undefined;
 	$: currentEra = eras.find((d) => d.id === data[active].era);
 
 	onMount(() => {
@@ -55,7 +54,7 @@
 
 <svelte:window on:keydown={onKeyDown} />
 
-<h3 class:fade>
+<h3>
 	<Handwriting
 		text={`Iconic ${id === "1" ? `leadoff (#1)` : id === "4" ? `cleanup (#4)` : `#${id}`} hitters`}
 		wonkiness={3}
@@ -91,7 +90,16 @@
 	</swiper-container>
 
 	<div class="click">
-		<Handwriting text="Click to flip to the back!" wonkiness={2} small={true} />
+		<Handwriting
+			text={`^ ${$mq.desktop ? "Click" : "Tap"} to view the back!`}
+			wonkiness={2}
+			small={true}
+		/>
+		<div class="keys">
+			{$mq.desktop
+				? "To navigate cards: click, swipe, or use arrow keys."
+				: "Swipe left or right to navigate between cards."}
+		</div>
 	</div>
 </div>
 
@@ -118,7 +126,16 @@
 		color: var(--color-gray-800);
 	}
 	.click {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		font-size: 1.5rem;
+	}
+	.keys {
+		font-size: 0.9rem;
+		font-family: var(--mono);
+		color: var(--color-gray-800);
+		margin-top: 0.5rem;
 	}
 	swiper-container {
 		width: 100vw;

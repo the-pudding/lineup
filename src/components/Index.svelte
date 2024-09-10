@@ -119,4 +119,16 @@
 	:global(#credits a) {
 		white-space: nowrap;
 	}
+
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 3.5rem;
+		}
+		.subhed {
+			font-size: 1rem;
+		}
+		.byline {
+			font-size: 0.9rem;
+		}
+	}
 </style>

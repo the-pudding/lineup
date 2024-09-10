@@ -6,6 +6,8 @@
 	import { flip } from "svelte/animate";
 	import variables from "$data/variables.json";
 	import changeOpacity from "$utils/changeOpacity.js";
+	import viewport from "$stores/viewport.js";
+	import { ImageOff, Infinity } from "lucide-svelte";
 
 	export let era;
 	export let year;
@@ -21,6 +23,8 @@
 		.domain([0, 5])
 		.interpolate(interpolateRgb)
 		.range([startColor, endColor]);
+
+	$: smallScreen = $viewport.width && $viewport.width < 700;
 </script>
 
 <div class={era} class:visible>
@@ -31,7 +35,9 @@
 		<tr class="head-2">
 			<td>Pos.</td>
 			<td>Player</td>
-			<td>Attributes (0-5)</td>
+			{#if !smallScreen}
+				<td>Attributes (0-5)</td>
+			{/if}
 		</tr>
 		{#each data as { name, average, power, walks, speed }, i (name)}
 			{@const stats = { average, power, walks, speed }}
@@ -52,20 +58,22 @@
 				<td class="name">
 					<Handwriting text={name.split(" ")[1]} wonkiness={3} />
 				</td>
-				<td class="contains-table">
-					<table class="inner">
-						<tr class="top">
-							{#each attr as a}
-								<td>{a === "average" ? "avg" : a}</td>
-							{/each}
-						</tr>
-						<tr class="bottom">
-							{#each attr as a}
-								<td style:background={colorScale(stats[a])}>{stats[a]}</td>
-							{/each}
-						</tr>
-					</table>
-				</td>
+				{#if !smallScreen}
+					<td class="contains-table">
+						<table class="inner">
+							<tr class="top">
+								{#each attr as a}
+									<td>{a === "average" ? "avg" : a}</td>
+								{/each}
+							</tr>
+							<tr class="bottom">
+								{#each attr as a}
+									<td style:background={colorScale(stats[a])}>{stats[a]}</td>
+								{/each}
+							</tr>
+						</table>
+					</td>
+				{/if}
 			</tr>
 		{/each}
 	</table>
@@ -160,5 +168,19 @@
 	}
 	table.inner {
 		font-size: 0.8rem;
+	}
+
+	@media (max-width: 700px) {
+		th {
+			font-size: 0.9rem;
+		}
+		.old,
+		.new {
+			padding: 4px;
+			border: 2px solid black;
+		}
+		td {
+			padding: 2px 4px;
+		}
 	}
 </style>

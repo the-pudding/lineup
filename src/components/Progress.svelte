@@ -100,4 +100,11 @@
 		background: none;
 		border-radius: 0;
 	}
+
+	@media (max-width: 900px) {
+		.progress {
+			top: 1rem;
+			left: 1rem;
+		}
+	}
 </style>

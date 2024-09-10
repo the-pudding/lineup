@@ -36,7 +36,9 @@
 	});
 </script>
 
-<Progress visible={progressVisible} {sections} />
+{#if $viewport.width > 775}
+	<Progress visible={progressVisible} {sections} />
+{/if}
 
 <div
 	class="sections"

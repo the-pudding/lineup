@@ -118,7 +118,7 @@
 	}
 	.title {
 		font-weight: bold;
-		color: var(--color-power);
+		color: var(--color-green-dark);
 	}
 	.subtitle {
 		font-family: var(--mono);

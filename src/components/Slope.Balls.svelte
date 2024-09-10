@@ -2,14 +2,21 @@
 	import { getContext, onMount } from "svelte";
 	import rough from "roughjs";
 
-	const { data, yScale, zScale, xGet } = getContext("LayerCake");
+	const { data, yScale, zScale, xGet, width } = getContext("LayerCake");
 
 	export let id;
 
 	const r = 7;
 
-	onMount(() => {
+	const draw = () => {
 		const svg = document.querySelector(`#chart-${id} svg`);
+		if (!svg) return;
+
+		const toClear = svg.querySelectorAll(`#chart-${id} svg path`);
+		toClear.forEach((element) => {
+			element.parentNode.removeChild(element);
+		});
+
 		const rc = rough.svg(svg);
 		$zScale.domain().forEach((attr) => {
 			const x1 = $xGet($data[0]) + 75;
@@ -39,6 +46,12 @@
 			svg.appendChild(leftCircle);
 			svg.appendChild(rightCircle);
 		});
+	};
+
+	$: $width, draw();
+
+	onMount(() => {
+		draw();
 	});
 </script>
 

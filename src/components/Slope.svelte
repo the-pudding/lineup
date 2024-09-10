@@ -28,7 +28,6 @@
 	const attributesExplainer = copy.body
 		.find((d) => d.type === "methods")
 		.value.find((d) => d.type === "ul").value;
-	$: console.log(attributesExplainer);
 
 	$: loaded = $loadedSections[sectionI];
 </script>

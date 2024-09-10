@@ -20,7 +20,7 @@
 	$: fade = $selectedCard !== undefined;
 </script>
 
-<section id={_.kebabCase(title)}>
+<section id={`batting-${id}`}>
 	<div class="non-cards" class:fade>
 		<h2>
 			<Handwriting text={title} wonkiness={5} />

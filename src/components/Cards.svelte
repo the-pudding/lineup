@@ -5,6 +5,7 @@
 	import { selectedCard, currentSection } from "$stores/misc.js";
 	import { register } from "swiper/element/bundle";
 	import mq from "$stores/mq.js";
+	import { onMount } from "svelte";
 
 	export let data;
 	export let id;
@@ -28,22 +29,31 @@
 		if (swiperEl) swiperEl.swiper.slideTo(index);
 	};
 
+	const onKeyDown = (e) => {
+		if ($currentSection !== sectionI || !$mq.desktop) return;
+		if (e.keyCode === 37) {
+			// Left
+			e.preventDefault();
+			swiperEl.swiper.slidePrev();
+		} else if (e.keyCode === 39) {
+			// Right
+			e.preventDefault();
+			swiperEl.swiper.slideNext();
+		}
+	};
+
 	register();
 
 	$: fade = $selectedCard !== undefined;
 	$: currentEra = eras.find((d) => d.id === data[active].era);
 
-	const onKeyDown = (e) => {
-		if ($currentSection !== sectionI) return;
-		if (e.keyCode === 37) {
-			swiperEl.swiper.slidePrev();
-		} else if (e.keyCode === 39) {
-			swiperEl.swiper.slideNext();
-		}
-	};
+	onMount(() => {
+		const links = document.querySelectorAll(`section#batting-${id} .back a`);
+		links.forEach((link) => link.setAttribute("tabindex", "-1"));
+	});
 </script>
 
-<svelte:window on:keydown|preventDefault={onKeyDown} />
+<svelte:window on:keydown={onKeyDown} />
 
 <h3 class:fade>
 	<Handwriting
@@ -72,6 +82,7 @@
 				<Card
 					id={_.kebabCase(card.name)}
 					{i}
+					{sectionI}
 					info={card}
 					active={active === i}
 				/>

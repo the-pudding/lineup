@@ -7,10 +7,12 @@
 	import { interpolateRgb } from "d3-interpolate";
 	import downloadIcon from "$svg/download.svg";
 	import changeOpacity from "$utils/changeOpacity.js";
+	import { onMount } from "svelte";
 
 	export let id;
 	export let i;
 	export let info;
+	export let flipped;
 
 	const { name, height, weight, throws, bats, hometown, birthday, blurb } =
 		info;
@@ -75,7 +77,10 @@
 
 		<div class="fun">
 			<figure class="img-wrapper">
-				<img src={`assets/back-images/${id}.png`} />
+				<img
+					src={`assets/back-images/${id}.png`}
+					alt={`ai generated illustration of ${name}`}
+				/>
 				<figcaption>This image is AI-generated.</figcaption>
 			</figure>
 			<div class="fact-text">{@html blurb}</div>
@@ -121,7 +126,11 @@
 			</table>
 		</div>
 
-		<button class="download" on:click={download}>
+		<button
+			tabindex={flipped ? "0" : "-1"}
+			class="download"
+			on:click={download}
+		>
 			Download data
 			<span>{@html downloadIcon}</span>
 		</button>

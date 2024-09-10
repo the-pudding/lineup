@@ -168,7 +168,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		overflow: scroll;
+		overflow-y: scroll;
 	}
 	.info {
 		font-size: 0.68rem;

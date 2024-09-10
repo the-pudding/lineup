@@ -2,7 +2,6 @@
 	import Handwriting from "$components/Handwriting.svelte";
 	import Scrollytelling from "$components/Scrollytelling.svelte";
 	import Sections from "$components/Sections.svelte";
-	import AllCards from "$components/AllCards.svelte";
 	import Footer from "$components/Footer.svelte";
 	import _ from "lodash";
 	import copy from "$data/copy.json";
@@ -17,20 +16,23 @@
 </script>
 
 <article>
-	<!-- <img src="assets/hero-wip.png" />
+	<img
+		src="assets/hero-wip.png"
+		alt="Three baseball cards for Rickey Henderson, Joe Carter, and Roberto Alomar"
+	/>
 
 	<h1>
 		<Handwriting text={copy.hed} />
 	</h1>
 	<div class="subhed">{@html copy.subhed}</div>
 	<div class="squiggle-wrapper">{@html squiggle}</div>
-	<div class="byline">{@html copy.byline}</div> -->
+	<div class="byline">{@html copy.byline}</div>
 
 	{#each copy.body as { type, value }}
 		{#if type === "text"}
 			<p>{@html value}</p>
 		{:else if type === "scroll"}
-			<!-- <Scrollytelling steps={value} /> -->
+			<Scrollytelling steps={value} />
 		{:else if type === "sections"}
 			<Sections sections={value} />
 		{:else}

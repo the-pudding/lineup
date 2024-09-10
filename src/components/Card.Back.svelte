@@ -9,16 +9,21 @@
 	import changeOpacity from "$utils/changeOpacity.js";
 
 	export let id;
+	export let i;
 	export let info;
-	export let flipped;
 
-	const { era, name, height, weight, throws, bats, hometown, birthday, blurb } =
+	const { name, height, weight, throws, bats, hometown, birthday, blurb } =
 		info;
 	const columns = ["season", "walks", "average", "power", "speed"];
-	const style =
-		era === "1970-2009"
-			? { edge: "#B5B69E", fg: "#44455D", name: "#eee9e9", bg: "#eee9e9" }
-			: { edge: "#fdf4dc", fg: "#08362d", name: "#fdf4dc", bg: "#eee9e9" };
+
+	const styles = [
+		{ edge: "#DFDCDA", fg: "#44455D", name: "white", bg: "white" },
+		{ edge: "#79aebd", fg: "#04041a", name: "#eee9e9", bg: "#eee9e9" },
+		{ edge: "#DBD3B8", fg: "#222", name: "#eee9e9", bg: "#eee9e9" },
+		{ edge: "#0E161D", fg: "#0E161D", name: "#d0edfa", bg: "white" },
+		{ edge: "#fd7069", fg: "black", name: "white", bg: "white" },
+		{ edge: "white", fg: "#091E37", name: "white", bg: "#f0f6fa" }
+	];
 
 	const download = (e) => {
 		e.stopPropagation();
@@ -38,6 +43,7 @@
 		.interpolate(interpolateRgb)
 		.range([startColor, endColor]);
 
+	$: style = styles[i % styles.length];
 	$: seasons = stats.filter((d) => _.deburr(d.name) === _.deburr(name));
 	$: forDownload = seasons.map((d) => ({
 		season: d.season,
@@ -51,7 +57,6 @@
 
 <div
 	class="back"
-	class:visible={flipped}
 	style={`--card-edge: ${style.edge}; --card-name: ${style.name}; --card-fg: ${style.fg}; --card-bg: ${style.bg}`}
 >
 	<div class="name">
@@ -127,18 +132,12 @@
 	.back {
 		border-radius: 0.25rem;
 		background: var(--card-edge);
-		padding: 0.75rem;
+		padding: 10px;
 		font-family: var(--sans);
 		display: flex;
 		flex-direction: column;
 		aspect-ratio: 10 / 14;
 		height: 100%;
-		transition: opacity 0.2s;
-		opacity: 0;
-	}
-	.back.visible {
-		transition: opacity 0.2s 0.5s;
-		opacity: 1;
 	}
 	.bg {
 		display: flex;
@@ -151,7 +150,7 @@
 		margin-bottom: 2px;
 	}
 	.name {
-		font-size: 1.5rem;
+		font-size: 1.4rem;
 		font-weight: bold;
 		text-transform: uppercase;
 		text-align: center;
@@ -159,9 +158,9 @@
 		background: var(--card-fg);
 		width: 100%;
 		height: 32px;
+		padding-top: 2px;
 	}
 	.main {
-		height: calc(100% - 40px);
 		background: var(--card-bg);
 		color: var(--card-fg);
 		border: 2px solid var(--card-fg);
@@ -184,19 +183,19 @@
 		display: flex;
 		align-items: center;
 		margin: 1rem 0;
-		gap: 1rem;
+		gap: 0.5rem;
 	}
 	.fact-text {
 		font-size: 0.8rem;
 	}
 	.table {
-		margin: 1rem 0;
+		margin: 1rem 0 0.5rem 0;
 		font-size: 0.9rem;
 	}
 	.download {
 		display: flex;
 		align-items: center;
-		font-size: 0.75rem;
+		font-size: 0.7rem;
 		align-self: start;
 		background: none;
 		color: var(--card-fg);
@@ -210,8 +209,8 @@
 		color: var(--color-green-medium);
 	}
 	figure {
-		height: 135px;
-		width: 135px;
+		height: 132px;
+		width: 132px;
 		flex-shrink: 0;
 	}
 	figcaption {

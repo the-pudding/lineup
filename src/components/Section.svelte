@@ -3,7 +3,7 @@
 	import slope from "$data/slope.csv";
 	import cards from "$data/cards.csv";
 	import Slope from "$components/Slope.svelte";
-	import Cards from "$components/Cards.v2.svelte";
+	import Cards from "$components/Cards.svelte";
 	import Handwriting from "$components/Handwriting.svelte";
 	import { loadedSections, selectedCard } from "$stores/misc.js";
 	import squiggle from "$svg/squiggle2.svg";
@@ -44,7 +44,7 @@
 	</div>
 
 	{#if loaded}
-		<Cards data={cardsData} {id} />
+		<Cards data={cardsData} {id} sectionI={i}/>
 	{/if}
 </section>
 

@@ -2,140 +2,146 @@
 	import Handwriting from "$components/Handwriting.svelte";
 	import Card from "$components/Card.svelte";
 	import _ from "lodash";
-	import { selectedCard } from "$stores/misc.js";
-	import shuffleIcon from "$svg/shuffle-handwritten.svg";
+	import { selectedCard, currentSection } from "$stores/misc.js";
+	import { register } from "swiper/element/bundle";
+	import mq from "$stores/mq.js";
 
 	export let data;
 	export let id;
+	export let sectionI;
+
+	let swiperEl;
+	let active = 1;
 
 	const eras = [
 		{ id: "1970-2009", name: "Pre-Stats" },
 		{ id: "2010-present", name: "Post-Stats" }
 	];
-	let dataCleaned = _.groupBy(data, "era");
-	_.forEach(dataCleaned, (group) => {
-		group.forEach((item, index) => {
-			item.zIndex = group.length - index;
-		});
-	});
 
-	const allIds = data.map((d) => _.kebabCase(d.name));
-
-	const shuffle = (era) => {
-		const elements = dataCleaned[era.id];
-		elements.forEach((el) => {
-			if (el.zIndex + 1 > elements.length) {
-				el.zIndex = 1;
-			} else {
-				el.zIndex += 1;
-			}
-		});
-		dataCleaned = dataCleaned;
+	const onSlideChange = (e) => {
+		const [swiper] = e.detail;
+		active = swiper.activeIndex;
 	};
 
+	const onClick = (index) => {
+		if (!$mq.desktop) return;
+		if (swiperEl) swiperEl.swiper.slideTo(index);
+	};
+
+	register();
+
 	$: fade = $selectedCard !== undefined;
+	$: currentEra = eras.find((d) => d.id === data[active].era);
+
+	const onKeyDown = (e) => {
+		if ($currentSection !== sectionI) return;
+		if (e.keyCode === 37) {
+			swiperEl.swiper.slidePrev();
+		} else if (e.keyCode === 39) {
+			swiperEl.swiper.slideNext();
+		}
+	};
 </script>
 
-<div class="cards-wrapper">
-	<h3 class:fade>
-		<Handwriting
-			text={`Iconic ${id === "1" ? `leadoff (#1)` : id === "4" ? `cleanup (#4)` : `#${id}`} hitters`}
-			wonkiness={3}
-		/>
-	</h3>
-	<div class="click" class:fade>
-		<Handwriting
-			text={`Click on a card to flip it over and see the back!`}
-			wonkiness={0}
-			small={true}
-		/>
-	</div>
+<svelte:window on:keydown|preventDefault={onKeyDown} />
 
-	<div class="cards">
-		{#each eras as era, i}
-			<div class="era">
-				<div class="stack">
-					{#each dataCleaned[era.id] as card, i}
-						{@const maxZIndex = dataCleaned[era.id].length}
-						<Card
-							{i}
-							id={_.kebabCase(card.name)}
-							{allIds}
-							zIndex={card.zIndex}
-							{maxZIndex}
-							info={{ ...card }}
-						/>
-					{/each}
-				</div>
-				<div class="label" class:fade>{era.name}</div>
-				<div class="sublabel" class:fade>({era.id})</div>
+<h3 class:fade>
+	<Handwriting
+		text={`Iconic ${id === "1" ? `leadoff (#1)` : id === "4" ? `cleanup (#4)` : `#${id}`} hitters`}
+		wonkiness={3}
+	/>
+</h3>
 
-				<button
-					class="shuffle"
-					class:fade
-					on:click={() => shuffle(era)}
-					disabled={$selectedCard}
-				>
-					{@html shuffleIcon}
-				</button>
-			</div>
+<div class="cards">
+	<div class="title">{currentEra.name}</div>
+	<div class="subtitle">({currentEra.id})</div>
+
+	<swiper-container
+		bind:this={swiperEl}
+		initial-slide={1}
+		effect="coverflow"
+		coverflowEffect={{ scale: 0.75, stretch: 50 }}
+		speed={500}
+		slides-per-view={"auto"}
+		centered-slides={true}
+		auto-height={true}
+		on:swiperslidechange={onSlideChange}
+	>
+		{#each data as card, i}
+			<swiper-slide on:click={() => onClick(i)}>
+				<Card
+					id={_.kebabCase(card.name)}
+					{i}
+					info={card}
+					active={active === i}
+				/>
+			</swiper-slide>
 		{/each}
+	</swiper-container>
+
+	<div class="click">
+		<Handwriting text="Click to flip to the back!" wonkiness={2} small={true} />
 	</div>
 </div>
 
 <style>
-	.cards-wrapper {
+	.cards {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
 	}
-	.cards-wrapper * {
-		transition: opacity calc(var(--1s) * 0.5);
+	.era {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 1rem 0;
 	}
-	.fade {
-		opacity: 0.1;
+	.title {
+		font-weight: bold;
+		color: var(--color-power);
+	}
+	.subtitle {
+		font-family: var(--mono);
+		font-size: 0.9rem;
+		color: var(--color-gray-800);
+	}
+	.click {
+		font-size: 1.5rem;
+	}
+	swiper-container {
+		width: 100vw;
+		margin: 1rem 0;
+		overflow: hidden;
+	}
+	swiper-slide {
+		height: 400px;
+		width: auto;
+		transform: translate(50%, 0);
+	}
+	swiper-slide:hover {
+		cursor: pointer;
+	}
+	:global(.swiper-slide-shadow-left) {
+		background: rgba(91, 99, 75, 0.3);
+		background: linear-gradient(
+			to left,
+			rgba(91, 99, 75, 0),
+			rgba(91, 99, 75, 0.3)
+		);
+	}
+	:global(.swiper-slide-shadow-right) {
+		background: rgba(91, 99, 75, 0.3);
+		background: linear-gradient(
+			to left,
+			rgba(91, 99, 75, 0.3),
+			rgba(91, 99, 75, 0)
+		);
 	}
 	h3 {
 		font-family: var(--handwriting);
 		font-size: 2.5rem;
-	}
-	.click {
-		font-size: 1.3rem;
-		font-family: var(--handwriting);
-	}
-	.cards {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		margin: 2.5rem 0;
-	}
-	.era {
-		position: relative;
-		width: 50%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.stack {
-		margin-bottom: 1rem;
-		position: relative;
-	}
-	.label,
-	.sublabel {
-		font-weight: bold;
-		text-align: center;
-	}
-	.sublabel {
-		font-size: 0.9rem;
-		color: var(--color-gray-700);
-		font-family: var(--mono);
-	}
-	button {
-		height: 1.5rem;
-		width: 1.5rem;
-		padding: 0;
-		background: none;
-		margin-top: 1rem;
+		margin: 0;
+		margin-bottom: 0.5rem;
 	}
 </style>

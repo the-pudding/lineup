@@ -28,11 +28,11 @@
 
 	{#each copy.body as { type, value }}
 		{#if type === "text"}
-			<!-- <p>{@html value}</p> -->
+			<p>{@html value}</p>
 		{:else if type === "scroll"}
 			<!-- <Scrollytelling steps={value} /> -->
 		{:else if type === "sections"}
-			<Sections sections={value.slice(0, 1)} />
+			<Sections sections={value} />
 			<!-- {:else if type === "all-cards"}
 			<details bind:open={detailsOpen}>
 				<summary>{@html value[0].value}</summary>

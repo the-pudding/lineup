@@ -28,6 +28,7 @@
 	const attributesExplainer = copy.body
 		.find((d) => d.type === "methods")
 		.value.find((d) => d.type === "ul").value;
+	$: console.log(attributesExplainer);
 
 	$: loaded = $loadedSections[sectionI];
 </script>
@@ -60,7 +61,7 @@
 
 <div class="methods">
 	<details>
-		<summary>Where do these attributes come from?</summary>
+		<summary>What are these attributes?</summary>
 		<ul>
 			{#each attributesExplainer as { value }}
 				<li>{@html value}</li>
@@ -72,6 +73,8 @@
 
 <style>
 	.methods {
+		font-family: var(--mono);
+		color: var(--color-gray-800);
 		margin-top: 2rem;
 		width: 100%;
 		max-width: 500px;
@@ -100,5 +103,21 @@
 	:global(.slope .y-axis text) {
 		font-size: 14px;
 		alignment-baseline: mathematical;
+	}
+	:global(strong.average:not(#methods strong.average)) {
+		color: var(--color-average);
+		border-bottom: 3px solid var(--color-average);
+	}
+	:global(strong.power:not(#methods strong.power)) {
+		color: var(--color-power);
+		border-bottom: 3px solid var(--color-power);
+	}
+	:global(strong.speed:not(#methods strong.speed)) {
+		color: var(--color-speed);
+		border-bottom: 3px solid var(--color-speed);
+	}
+	:global(strong.walks:not(#methods strong.walks)) {
+		color: var(--color-walks);
+		border-bottom: 3px solid var(--color-walks);
 	}
 </style>

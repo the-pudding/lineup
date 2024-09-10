@@ -44,13 +44,13 @@
 	</div>
 
 	{#if loaded}
-		<Cards data={cardsData} {id} sectionI={i}/>
+		<Cards data={cardsData} {id} sectionI={i} />
 	{/if}
 </section>
 
 <style>
 	section {
-		margin: 3rem 0;
+		margin: 5rem 0;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -62,7 +62,7 @@
 		font-size: 3rem;
 		font-family: var(--handwriting);
 		text-transform: uppercase;
-		margin-bottom: 3rem;
+		margin-bottom: 1rem;
 		text-align: center;
 		position: relative;
 	}

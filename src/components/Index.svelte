@@ -33,20 +33,6 @@
 			<!-- <Scrollytelling steps={value} /> -->
 		{:else if type === "sections"}
 			<Sections sections={value} />
-			<!-- {:else if type === "all-cards"}
-			<details bind:open={detailsOpen}>
-				<summary>{@html value[0].value}</summary>
-				<div class="click">
-					<Handwriting
-						text={`Click on a card to flip it over and see the back!`}
-						wonkiness={0}
-						small={true}
-					/>
-				</div>
-				{#if loadedAllCards}
-					<AllCards />
-				{/if}
-			</details>
 		{:else}
 			<section id={type}>
 				<h2>
@@ -63,7 +49,7 @@
 						</ul>
 					{/if}
 				{/each}
-			</section> -->
+			</section>
 		{/if}
 	{/each}
 

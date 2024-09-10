@@ -31,7 +31,7 @@
 		<tr class="head-2">
 			<td>Pos.</td>
 			<td>Player</td>
-			<td>Attributes</td>
+			<td>Attributes (0-5)</td>
 		</tr>
 		{#each data as { name, average, power, walks, speed }, i (name)}
 			{@const stats = { average, power, walks, speed }}

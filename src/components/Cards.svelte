@@ -14,8 +14,8 @@
 	let active = 1;
 
 	const eras = [
-		{ id: "1970-2009", name: "Pre-Stats" },
-		{ id: "2010-present", name: "Post-Stats" }
+		{ id: "1970-2009", name: "Classic Era" },
+		{ id: "2010-present", name: "Analytics Era" }
 	];
 
 	const onSlideChange = (e) => {

@@ -32,7 +32,7 @@
 	$: loaded = $loadedSections[sectionI];
 </script>
 
-<div class="slope chart-container" id={`chart-${id}`}>
+<figure class="slope chart-container" id={`chart-${id}`}>
 	<div class="chart-title">{title}</div>
 
 	<LayerCake
@@ -56,7 +56,10 @@
 			{/if}
 		</Svg>
 	</LayerCake>
-</div>
+	<figcaption class="sr-only">
+		{`Slope chart showing the change in speed, average, walks, and power among players who batted #${id} between 1970-2009 and 2010-present`}
+	</figcaption>
+</figure>
 
 <div class="methods">
 	<details>

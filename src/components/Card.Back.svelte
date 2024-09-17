@@ -139,7 +139,6 @@
 
 <style>
 	.back {
-		border-radius: 0.25rem;
 		background: var(--card-edge);
 		padding: 10px;
 		font-family: var(--sans);

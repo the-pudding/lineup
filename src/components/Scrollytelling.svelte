@@ -106,6 +106,9 @@
 		z-index: 1000;
 		line-height: 1.7;
 	}
+	.step:first-of-type {
+		margin-top: 20vh;
+	}
 	.step p {
 		padding: 1rem;
 	}

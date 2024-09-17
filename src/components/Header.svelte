@@ -15,7 +15,9 @@
 	.wordmark {
 		max-width: 10em;
 		margin: 0 auto;
+		margin-top: 2rem;
 		padding: 1em 0;
+		transform: rotate(-4deg);
 	}
 
 	.wordmark a {

@@ -90,16 +90,12 @@
 	</swiper-container>
 
 	<div class="click">
-		<Handwriting
-			text={`^ ${$mq.desktop ? "Click" : "Tap"} to view the back!`}
-			wonkiness={2}
-			small={true}
-		/>
-		<div class="keys">
-			{$mq.desktop
-				? "To navigate cards: click, swipe, or use arrow keys."
-				: "Swipe left or right to navigate between cards."}
-		</div>
+		<Handwriting text={`^ Click to flip over!`} wonkiness={2} small={true} />
+	</div>
+	<div class="keys">
+		{$mq.desktop
+			? "To navigate cards: click, swipe, or use arrow keys."
+			: "Swipe left or right to navigate between cards."}
 	</div>
 </div>
 
@@ -121,21 +117,17 @@
 		color: var(--color-green-dark);
 	}
 	.subtitle {
-		font-family: var(--mono);
 		font-size: 0.9rem;
 		color: var(--color-gray-800);
 	}
 	.click {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		font-size: 1.5rem;
+		font-size: 2rem;
+		margin-bottom: 1rem;
 	}
 	.keys {
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 		font-family: var(--mono);
 		color: var(--color-gray-800);
-		margin-top: 0.5rem;
 	}
 	swiper-container {
 		width: 100vw;

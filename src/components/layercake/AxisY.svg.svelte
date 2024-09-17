@@ -63,27 +63,15 @@
 <style>
 	.tick {
 		font-size: 0.725em;
-		font-weight: 200;
 	}
 
 	.tick line {
-		stroke: var(--color-gray-300);
+		stroke: #d3c5ae;
 	}
 	.tick .gridline {
 		stroke-dasharray: 4px 4px;
 	}
-
-	line.average {
-		stroke: var(--color-gray-400);
-		stroke-dasharray: 4px 4px;
-	}
-	text.average {
-		fill: var(--color-gray-900);
-		font-size: 1rem;
-		alignment-baseline: middle;
-	}
-
 	.tick text {
-		fill: var(--color-gray-600);
+		fill: #806d4b;
 	}
 </style>

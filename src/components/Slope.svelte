@@ -47,8 +47,8 @@
 		padding={{ top: 25, right: 75, bottom: 0, left: 75 }}
 	>
 		<Svg>
-			<AxisX dy={20} />
-			<AxisY textAnchor={"end"} />
+			<AxisX dy={24} />
+			<AxisY textAnchor={"end"} dxTick={-4} />
 			<AxisY gridlines={false} dxTick={"100%"} textAnchor={"start"} />
 
 			{#if loaded}
@@ -76,11 +76,10 @@
 <style>
 	.methods {
 		font-family: var(--mono);
-		color: var(--color-gray-800);
 		margin-top: 2rem;
 		width: 100%;
 		max-width: 500px;
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 	}
 	ul {
 		margin: 1.5rem 0;
@@ -97,7 +96,7 @@
 		margin-bottom: 3rem;
 	}
 	.chart-title {
-		font-weight: bold;
+		font-size: 0.9rem;
 	}
 	:global(.slope .x-axis text) {
 		font-size: 18px;
@@ -109,17 +108,21 @@
 	:global(strong.average:not(#methods strong.average)) {
 		color: var(--color-average);
 		border-bottom: 3px solid var(--color-average);
+		font-weight: 500;
 	}
 	:global(strong.power:not(#methods strong.power)) {
 		color: var(--color-power);
 		border-bottom: 3px solid var(--color-power);
+		font-weight: 500;
 	}
 	:global(strong.speed:not(#methods strong.speed)) {
 		color: var(--color-speed);
 		border-bottom: 3px solid var(--color-speed);
+		font-weight: 500;
 	}
 	:global(strong.walks:not(#methods strong.walks)) {
 		color: var(--color-walks);
 		border-bottom: 3px solid var(--color-walks);
+		font-weight: 500;
 	}
 </style>

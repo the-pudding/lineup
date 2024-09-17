@@ -14,7 +14,7 @@
 	$: if (detailsOpen && !loadedAllCards) {
 		loadedAllCards = true;
 	}
-	$: imgSrc = `assets/hero-${$viewport.width < 600 ? "mobile" : "desktop"}.png`;
+	$: imgSrc = `assets/hero-${$viewport.width && $viewport.width < 600 ? "mobile" : "desktop"}.png`;
 </script>
 
 <article>
@@ -114,6 +114,7 @@
 		padding-left: 3rem;
 	}
 	img {
+		min-height: 242.86px;
 		max-height: 25rem;
 		width: auto;
 		margin: 2rem auto;
@@ -136,6 +137,7 @@
 			margin: 0 auto;
 			margin-top: 2rem;
 			max-height: none;
+			min-height: 200px;
 		}
 	}
 </style>

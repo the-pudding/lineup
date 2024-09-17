@@ -95,7 +95,6 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
-		border-radius: 0.25rem;
 		transition: transform calc(var(--1s) * 0.75);
 		transform-style: preserve-3d;
 		background: none;
@@ -109,7 +108,6 @@
 		height: 100%;
 		backface-visibility: hidden;
 		top: 0;
-		border-radius: 0.25rem;
 	}
 	.front {
 		height: 100%;
@@ -128,6 +126,5 @@
 	}
 	img {
 		height: 100%;
-		border-radius: 0.25rem;
 	}
 </style>

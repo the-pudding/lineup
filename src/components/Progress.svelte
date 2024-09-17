@@ -59,6 +59,7 @@
 		position: fixed;
 		top: 3rem;
 		left: 3rem;
+		font-size: 0.8rem;
 		opacity: 0;
 		transition: opacity calc(var(--1s) * 0.5);
 	}
@@ -66,7 +67,9 @@
 		opacity: 1;
 	}
 	.block {
-		display: block;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		background: #c5c9b7;
 		font-family: var(--mono);
 		margin: 2px 0;

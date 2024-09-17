@@ -6,6 +6,7 @@
 	import _ from "lodash";
 	import copy from "$data/copy.json";
 	import squiggle from "$svg/squiggle2.svg";
+	import viewport from "$stores/viewport.js";
 
 	let detailsOpen = false;
 	let loadedAllCards = false;
@@ -13,11 +14,12 @@
 	$: if (detailsOpen && !loadedAllCards) {
 		loadedAllCards = true;
 	}
+	$: imgSrc = `assets/hero-${$viewport.width < 600 ? "mobile" : "desktop"}.png`;
 </script>
 
 <article>
 	<img
-		src="assets/hero-wip.png"
+		src={imgSrc}
 		alt="Three baseball cards for Rickey Henderson, Joe Carter, and Roberto Alomar"
 	/>
 
@@ -129,6 +131,11 @@
 		}
 		.byline {
 			font-size: 0.9rem;
+		}
+		img {
+			margin: 0 auto;
+			margin-top: 2rem;
+			max-height: none;
 		}
 	}
 </style>

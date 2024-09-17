@@ -72,6 +72,6 @@
 		stroke-dasharray: 4px 4px;
 	}
 	.tick text {
-		fill: #806d4b;
+		/* fill: #806d4b; */
 	}
 </style>

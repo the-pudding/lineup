@@ -233,12 +233,12 @@
 	}
 	table {
 		font-family: var(--mono);
+		font-size: 0.8rem;
 	}
 	th {
-		font-weight: bold;
 		text-align: center;
 		text-transform: uppercase;
-		padding: 0;
+		padding-top: 0;
 	}
 	td {
 		padding: 0;

@@ -115,7 +115,7 @@
 	}
 
 	.tick text {
-		fill: #806d4b;
+		/* fill: #806d4b; */
 	}
 
 	.tick .tick-mark,

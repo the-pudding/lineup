@@ -132,11 +132,13 @@
 		width: 100vw;
 		margin: 1rem 0;
 		overflow: hidden;
+		pointer-events: none;
 	}
 	swiper-slide {
 		height: 400px;
 		width: auto;
 		transform: translate(50%, 0);
+		pointer-events: auto;
 	}
 	swiper-slide:hover {
 		cursor: pointer;

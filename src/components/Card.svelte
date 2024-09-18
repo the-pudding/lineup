@@ -17,6 +17,7 @@
 	const trapFocus = () => {
 		const backEl = document.querySelector(`#${id} .back .main`);
 		backEl.focus();
+		backEl.scrollTop = 0;
 	};
 
 	const onClick = () => {
@@ -37,8 +38,9 @@
 			e.preventDefault();
 			onClick();
 		} else if (trapped) {
-			const focusableElements = document.querySelectorAll(focusableSelector);
-			console.log(focusableElements);
+			const focusableElements = Array.from(
+				document.querySelectorAll(focusableSelector)
+			);
 			const firstFocusable = focusableElements[0];
 			const lastFocusable = focusableElements[focusableElements.length - 1];
 
@@ -48,10 +50,18 @@
 					if (document.activeElement === firstFocusable) {
 						lastFocusable.focus();
 						e.preventDefault();
+					} else {
+						const index = focusableElements.indexOf(document.activeElement);
+						focusableElements[index - 1].focus();
+						e.preventDefault();
 					}
 				} else {
 					if (document.activeElement === lastFocusable) {
 						firstFocusable.focus();
+						e.preventDefault();
+					} else {
+						const index = focusableElements.indexOf(document.activeElement);
+						focusableElements[index + 1].focus();
 						e.preventDefault();
 					}
 				}

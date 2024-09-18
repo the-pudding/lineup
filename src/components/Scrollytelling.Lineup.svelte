@@ -30,7 +30,9 @@
 <div class={era} class:visible>
 	<table class="outer">
 		<tr class="head">
-			<th colspan="3">{year} Toronto Blue Jays</th>
+			<th colspan="3"
+				>{year} Toronto{#if smallScreen}<br />{/if} Blue Jays</th
+			>
 		</tr>
 		<tr class="head-2">
 			<td>Pos.</td>
@@ -46,9 +48,13 @@
 				highlights
 					.filter((d) => d.era === era && d.step === step)
 					.every((d) => d.name !== name)}
+			{@const highlighted = highlights.find(
+				(d) => d.era === era && d.step === step && d.name === name
+			)}
 			<tr
 				class={`${name.split(" ")[1].toLowerCase()} row`}
 				class:faded
+				class:highlighted
 				animate:flip={{
 					delay: visible ? 1000 : 500,
 					duration: visible ? 2500 : 0
@@ -94,10 +100,10 @@
 		transition: opacity 0.5s;
 	}
 	.old .outer {
-		border: 2px solid dodgerblue;
+		border: 4px solid var(--category-blue);
 	}
 	.new .outer {
-		border: 2px solid rgb(11, 44, 77);
+		border: 4px solid darkblue;
 	}
 	.visible {
 		opacity: 1;
@@ -176,11 +182,41 @@
 		}
 		.old,
 		.new {
-			padding: 4px;
-			border: 2px solid black;
+			padding: 2px;
+		}
+		.old {
+			border: 4px solid var(--category-blue);
+		}
+		.new {
+			border: 4px solid darkblue;
+		}
+		.old .outer,
+		.new .outer,
+		td:not(.contains-table):not(.inner td):not(.name) {
+			border: none;
+		}
+		tr {
+			border: none;
+			border-bottom: 1px solid black;
+		}
+		tr:last-of-type {
+			border-bottom: none;
+		}
+		tr.highlighted {
+			background: var(--color-green-bright);
 		}
 		td {
-			padding: 2px 4px;
+			text-align: start;
+			padding: 4px;
+		}
+		tr td:first-child {
+			padding-left: 8px;
+		}
+	}
+
+	@media (max-width: 400px) {
+		th {
+			max-width: 3rem;
 		}
 	}
 </style>

@@ -56,9 +56,9 @@
 			</section>
 		{/if}
 	{/each}
-
-	<Footer />
 </article>
+
+<Footer />
 
 <style>
 	article {

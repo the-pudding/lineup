@@ -126,7 +126,6 @@
 	}
 	.keys {
 		font-size: 0.8rem;
-		font-family: var(--mono);
 		color: var(--color-gray-800);
 	}
 	swiper-container {

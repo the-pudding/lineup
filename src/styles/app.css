@@ -100,5 +100,5 @@ a {
 }
 a:hover {
 	color: var(--color-green-medium);
-	text-decoration: 2px underline var(--color-green-medium);
+	border-bottom: 2px solid var(--color-green-medium);
 }

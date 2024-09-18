@@ -125,4 +125,10 @@
 		border-bottom: 3px solid var(--color-walks);
 		font-weight: 500;
 	}
+
+	@media (max-width: 400px) {
+		.chart-container {
+			padding: 0 2rem;
+		}
+	}
 </style>

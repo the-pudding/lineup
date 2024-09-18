@@ -11,14 +11,12 @@
 	export let active;
 
 	const focusableSelector = ["button", "a", '[tabindex]:not([tabindex="-1"])']
-		.map((selector) => `#${id} .back ${selector}`)
+		.map((selector) => `#${id} .back ${selector}:not(section.main)`)
 		.join(",");
 
 	const trapFocus = () => {
-		const focusableElements = document.querySelectorAll(focusableSelector);
-		if (focusableElements.length) focusableElements[0].focus();
-		const main = document.querySelector(`#${id} .back .main`);
-		main.scrollTop = 0;
+		const backEl = document.querySelector(`#${id} .back .main`);
+		backEl.focus();
 	};
 
 	const onClick = () => {
@@ -40,6 +38,7 @@
 			onClick();
 		} else if (trapped) {
 			const focusableElements = document.querySelectorAll(focusableSelector);
+			console.log(focusableElements);
 			const firstFocusable = focusableElements[0];
 			const lastFocusable = focusableElements[focusableElements.length - 1];
 

@@ -7,7 +7,7 @@
 	import { interpolateRgb } from "d3-interpolate";
 	import downloadIcon from "$svg/download.svg";
 	import changeOpacity from "$utils/changeOpacity.js";
-	import { onMount } from "svelte";
+	import mq from "$stores/mq.js";
 
 	export let id;
 	export let i;
@@ -65,7 +65,14 @@
 		{name}
 	</div>
 
-	<div class="main">
+	<!-- svelte-ignore a11y-no-redundant-roles -->
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+	<section
+		class="main"
+		tabindex={flipped ? 0 : -1}
+		role="region"
+		aria-label="card content"
+	>
 		<div class="info">
 			<span>Height: {height}</span>
 			<span>Weight: {weight} lbs</span>
@@ -126,15 +133,17 @@
 			</table>
 		</div>
 
-		<button
-			tabindex={flipped ? "0" : "-1"}
-			class="download"
-			on:click={download}
-		>
-			Download data
-			<span>{@html downloadIcon}</span>
-		</button>
-	</div>
+		{#if $mq.desktop}
+			<button
+				tabindex={flipped ? "0" : "-1"}
+				class="download"
+				on:click={download}
+			>
+				Download data
+				<span>{@html downloadIcon}</span>
+			</button>
+		{/if}
+	</section>
 </div>
 
 <style>
@@ -210,6 +219,7 @@
 	}
 	.download span {
 		height: 18px;
+		width: 18px;
 		display: flex;
 		margin-left: 4px;
 	}
@@ -239,6 +249,7 @@
 		text-align: center;
 		text-transform: uppercase;
 		padding-top: 0;
+		font-weight: normal;
 	}
 	td {
 		padding: 0;

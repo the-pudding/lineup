@@ -76,7 +76,7 @@
 
 <style>
 	footer {
-		background-color: var(--color-fg);
+		background-color: var(--color-green-dark);
 		color: var(--color-bg);
 		font-family: var(--sans);
 		padding: 3em 1em;

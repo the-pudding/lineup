@@ -15,7 +15,12 @@
 	const load = (section) => {
 		$loadedSections[section] = true;
 	};
-
+	const onEnter = () => {
+		if (bigScreen) progressVisible = true;
+	};
+	const onExit = () => {
+		if (bigScreen) progressVisible = false;
+	};
 	const sectionChange = () => {
 		if (!$loadedSections[$currentSection]) {
 			load($currentSection);
@@ -29,6 +34,7 @@
 		}
 	};
 
+	$: bigScreen = $viewport.width > 775;
 	$: $currentSection, sectionChange();
 
 	onMount(() => {
@@ -36,15 +42,13 @@
 	});
 </script>
 
-{#if $viewport.width > 775}
-	<Progress visible={progressVisible} {sections} />
-{/if}
+<Progress visible={progressVisible} {sections} />
 
 <div
 	class="sections"
 	use:inView={{ bottom: $viewport.height / 2 }}
-	on:enter={() => (progressVisible = true)}
-	on:exit={() => (progressVisible = false)}
+	on:enter={onEnter}
+	on:exit={onExit}
 >
 	<Scrolly bind:value={$currentSection}>
 		{#each sections as props, i}

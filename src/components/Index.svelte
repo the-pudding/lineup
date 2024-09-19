@@ -104,6 +104,10 @@
 	#credits {
 		margin-top: 8rem;
 	}
+	#methods,
+	#credits {
+		font-size: 0.9rem;
+	}
 	.click {
 		display: flex;
 		justify-content: center;

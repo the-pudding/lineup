@@ -39,8 +39,8 @@
 			name: "Paul Molitor",
 			step: 2
 		},
-		{ era: "old", name: "Tony Fernandez", step: 6 },
-		{ era: "new", name: "Tony Fernandez", step: 6 },
+		{ era: "old", name: "Roberto Alomar", step: 6 },
+		{ era: "new", name: "Roberto Alomar", step: 6 },
 		{ era: "old", name: "Rickey Henderson", step: 6 },
 		{ era: "new", name: "Rickey Henderson", step: 6 },
 		{ era: "old", name: "Devon White", step: 6 },
@@ -49,8 +49,8 @@
 		{ era: "new", name: "John Olerud", step: 7 },
 		{ era: "old", name: "Paul Molitor", step: 7 },
 		{ era: "new", name: "Paul Molitor", step: 7 },
-		{ era: "old", name: "Roberto Alomar", step: 7 },
-		{ era: "new", name: "Roberto Alomar", step: 7 },
+		{ era: "old", name: "Tony Fernandez", step: 7 },
+		{ era: "new", name: "Tony Fernandez", step: 7 },
 		{ era: "old", name: "Joe Carter", step: 8 },
 		{ era: "new", name: "Joe Carter", step: 8 }
 	];

@@ -12,8 +12,8 @@
 	export let sectionI;
 
 	let swiperEl;
-	let initialSlide = _.random(1, data.length - 2);
-	let active = initialSlide;
+	// let initialSlide = _.random(1, data.length - 2);
+	let active = 1;
 
 	const eras = [
 		{ id: "1970-2009", name: "Classic Era" },
@@ -27,7 +27,9 @@
 
 	const onClick = (index) => {
 		if (!$mq.desktop) return;
-		if (swiperEl) swiperEl.swiper.slideTo(index);
+		if (swiperEl) {
+			swiperEl.swiper.slideTo(index);
+		}
 	};
 
 	const onKeyDown = (e) => {
@@ -68,7 +70,7 @@
 
 	<swiper-container
 		bind:this={swiperEl}
-		initial-slide={initialSlide}
+		initial-slide={1}
 		effect="coverflow"
 		coverflowEffect={{ scale: 0.75, stretch: 50 }}
 		speed={500}

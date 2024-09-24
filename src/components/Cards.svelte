@@ -13,7 +13,7 @@
 
 	let swiperEl;
 	// let initialSlide = _.random(1, data.length - 2);
-	let active = 1;
+	let active = 2;
 
 	const eras = [
 		{ id: "1970-2009", name: "Classic Era" },
@@ -70,7 +70,7 @@
 
 	<swiper-container
 		bind:this={swiperEl}
-		initial-slide={1}
+		initial-slide={2}
 		effect="coverflow"
 		coverflowEffect={{ scale: 0.75, stretch: 50 }}
 		speed={500}

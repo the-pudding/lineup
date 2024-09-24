@@ -132,7 +132,7 @@
 		color: var(--color-gray-800);
 	}
 	swiper-container {
-		width: 100vw;
+		width: 100%;
 		margin: 1rem 0;
 		overflow: hidden;
 		pointer-events: none;

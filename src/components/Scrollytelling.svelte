@@ -110,7 +110,8 @@
 		margin-top: 20vh;
 	}
 	.step p {
-		padding: 1rem;
+		padding: 0.5rem 1.5rem;
+		text-align: start;
 	}
 	.sticky {
 		position: sticky;
